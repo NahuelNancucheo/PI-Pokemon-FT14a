@@ -1,10 +1,12 @@
 const { Router } = require('express');
 const router = Router();
-//importar controladores correspondientes
+//importo controladores
+const {getAllPokemons, getPokemonByID, createPokemon} = require('../controllers/pokemon');
 
-router.get('/', function(req, res) {
-    res.send('Soy un get pokemon :)')
-});
+//asigno controladores
+router.get('/', getAllPokemons);
+router.get('/:idPokemon', getPokemonByID);
+router.post('/', createPokemon);
 
 
 module.exports = router;
