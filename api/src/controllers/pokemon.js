@@ -1,12 +1,7 @@
 const axios = require('axios');
 const {v4: uuidv4} = require('uuid');
 const { Pokemon, Type } = require('../db');
-const {
-    API_HOME,
-    SERVER_URL,
-    SERVER_PORT
-} = require('../constants');
-
+const { API_HOME } = require('../constants');
 
 /*
 -get all pokemons -> concatenar api con db(recibo por query)
@@ -135,14 +130,13 @@ function getPokemonByID(req, res, next) {
 };
 
 async function createPokemon(req, res, next) {
-    const name = req.body.name.toLowerCase();
-    const {hp, attack, defense, speed, height, weight, types, img} = req.body;
+    const {name, hp, attack, defense, speed, height, weight, types, img} = req.body;
 
     //if(buscar si el name ingresado ya existe en api o db?)
     try {
-        const newPokemon = await Pokemon.create({
+        let newPokemon = await Pokemon.create({
             id: uuidv4(),
-            name, 
+            name: name.toLowerCase(), 
             hp,
             attack,
             defense,
@@ -152,6 +146,8 @@ async function createPokemon(req, res, next) {
             img
         });
         //await newPokemon.setTypes(types);//.add o settpyes los types en la db
+        await newPokemon.addTypes(types);
+        console.log(newPokemon);
         return res.json(newPokemon);
     } catch(err) {
         console.error(err);
