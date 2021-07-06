@@ -13,12 +13,6 @@ const {
 -get pokemons por id 
 -get pokemons por name
 -crear pokemon -> que no se repita el name //controlar que pase el name por body
-
-function getApi ()  {
-    return axios.get(`${API_HOME}?limit=${LIMIT_OF_POKEMONS}`) // preguntar si puedo usar limits o tengo que hacer doble request a la api
-    .then((response) => {return response.data.results})
-    .catch((err) => console.error(err));
-};
 */
 
 //como hacer para no hacer tantos request
@@ -30,10 +24,16 @@ async function getApi() {
     for(obj of pokemonsList.data.results) {
         let dataObj = await axios.get(`${obj.url}`);
         pokemonsData.push({
-            id: dataObj.data.forms[0].name,
+            id: dataObj.data.id,
             name: dataObj.data.forms[0].name,
             img: dataObj.data.sprites.other.dream_world.front_default,
-            types: dataObj.data.types.map((type) => type.type.name)
+            height: dataObj.data.height,
+            weight: dataObj.data.weight,
+            hp: dataObj.data.stats[0].base_stat,
+            attack: dataObj.data.stats[1].base_stat,
+            defense: dataObj.data.stats[2].base_stat,
+            speed: dataObj.data.stats[5].base_stat,
+            types: dataObj.data.types.map((t) => t.type.name)
         })
     }
     return pokemonsData;
@@ -44,39 +44,104 @@ async function getApi() {
 };
 
 async function getAllPokemons(req, res, next) {
-    const { name } = req.query;
+    const name = req.query.name;
     //busco en api
     const pokeApi = await getApi() ;
     //busco en db
     const pokeMine = await Pokemon.findAll({include: Type});
     
-    //aca tengo que mostrar name, id y types
     Promise.all([pokeApi, pokeMine])
         .then(response => {
             let [ pokeApiRes, pokeMineRes] = response;
-            return pokeApiRes.concat(pokeMineRes);
+            return res.json(pokeApiRes.concat(pokeMineRes));
         })
-        .then(pokeList => res.send(pokeList));
+        /*
+        .then(pokeList => { // [{api},{mine},{mine}] -> lista completa
+            //searchByName
+            if(name) {
+                const pokemonSearch = pokeList.find(p => p.name === name.toLowerCase());
+                res.json(pokemonSearch);
+            }
+            //byusers
+            //buyapi
+        });*/
+
 };
 
 function getPokemonByID(req, res, next) {
-    const idPokemon = req.params.idPokemon;
-    //console.log(req.params.idPokemon)
+    const idPokemon = req.params.id;
+    //testeo que me mandan por params
+    const numberTest = /^[0-9]+$/.test(idPokemon);
+    const uuidTest = /[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}/.test(idPokemon);
     
-    //if(isNumber){} => busco api
-    //if(isUUid){} => busco db
+    
+        axios.get(`${API_HOME}/${idPokemon}`)
+        .then(r => {
+            let pokemon = {
+                id: r.data.id,
+                name: r.data.forms[0].name,
+                img: r.data.sprites.other.dream_world.front_default,
+                height: r.data.height,
+                weight: r.data.weight,
+                hp: r.data.stats[0].base_stat,
+                attack: r.data.stats[1].base_stat,
+                defense: r.data.stats[2].base_stat,
+                speed: r.data.stats[5].base_stat,
+                types: r.data.types.map(t => t.type.name)
+            }
+            res.send(pokemon);
+        })
+        //arreglar tantos catch
+        .catch((err) => {
+			Pokemon.findOne({
+				where: {
+					id: idPokemon,
+				},
+			})
+				.then((r) => {
+					res.send(r);
+				})
+				.catch((err) => {
+					res.status(200).send({error: 'pokemon not found'});
+				});
+		})
+		.catch((err) => {
+			res.status(400).send({error: err});
+		});
+    /*
+    else {
+        Pokemon.findByPk(idPokemon)
+        .then(r => res.json(r))
+        .catch(() => next({status: 404, message: 'Pokemon not found'}));
+    }
+    */
 
-    return axios.get(`${API_HOME}/${idPokemon}`)
-        .then(response => res.json(response.data.stats)) //aca me tengor que traer los stats de cad apokemon
+    /*
+    if(uuidTest){
+        Pokemon.findOne({
+            where: {
+                id: idPokemon
+            }
+        })
+        .then(r => {res.send(r)})
+        .catch(() => next({status: 404, message: 'Pokemon not found'}));
+    };
+    
+    return next({
+        status: 404,
+        message: 'That pokemon does not exist, yet'
+    });
+    */
 };
 
 async function createPokemon(req, res, next) {
-    const name = req.body.name;
-    const {hp, attack, defense, speed, height, weight, types, spriteSrc} = req.body;
-    console.log(hp);
+    const name = req.body.name.toLowerCase();
+    const {hp, attack, defense, speed, height, weight, types, img} = req.body;
 
+    //if(buscar si el name ingresado ya existe en api o db?)
     try {
         const newPokemon = await Pokemon.create({
+            id: uuidv4(),
             name, 
             hp,
             attack,
@@ -84,11 +149,13 @@ async function createPokemon(req, res, next) {
             speed,
             height,
             weight,
-            spriteSrc
+            img
         });
-        res.json(newPokemon) //falta .add o settpyes los types en la db
+        //await newPokemon.setTypes(types);//.add o settpyes los types en la db
+        return res.json(newPokemon);
     } catch(err) {
         console.error(err);
+        next(err);
     }
 
 };

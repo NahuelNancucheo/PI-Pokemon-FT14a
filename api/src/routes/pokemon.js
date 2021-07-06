@@ -5,7 +5,7 @@ const {getAllPokemons, getPokemonByID, createPokemon} = require('../controllers/
 
 //asigno controladores
 router.get('/', getAllPokemons);
-router.get('/:idPokemon', getPokemonByID);
+router.get('/:id', getPokemonByID);
 router.post('/', createPokemon);
 
 

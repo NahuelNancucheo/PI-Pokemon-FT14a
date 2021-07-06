@@ -6,7 +6,7 @@ const typeRoutes = require('./type');
 const router = Router();
 
 // Configuro los routers
-router.use('/pokemon', pokemonRoutes);
-router.use('/type', typeRoutes);
+router.use('/pokemons', pokemonRoutes);
+router.use('/types', typeRoutes);
 
 module.exports = router;
