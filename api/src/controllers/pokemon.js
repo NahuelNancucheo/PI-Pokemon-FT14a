@@ -21,27 +21,53 @@ function getApi ()  {
 };
 */
 
+//como hacer para no hacer tantos request
+async function getApi() {
+    try {
+    const pokemonsList = await axios.get(`${API_HOME}?limit=40`)
+    let pokemonsData = [];
+
+    for(obj of pokemonsList.data.results) {
+        let dataObj = await axios.get(`${obj.url}`);
+        pokemonsData.push({
+            id: dataObj.data.forms[0].name,
+            name: dataObj.data.forms[0].name,
+            img: dataObj.data.sprites.other.dream_world.front_default,
+            types: dataObj.data.types.map((type) => type.type.name)
+        })
+    }
+    return pokemonsData;
+    } catch(err) {
+        console.log(err);
+    }
+    
+};
+
 async function getAllPokemons(req, res, next) {
     const { name } = req.query;
     //busco en api
-    //const pokeApi = await ;
+    const pokeApi = await getApi() ;
     //busco en db
     const pokeMine = await Pokemon.findAll({include: Type});
     
-    //devuelvo todo//HACER EL GET API DE NUEVO!!
-    Promise.all([ pokeMine])
+    //aca tengo que mostrar name, id y types
+    Promise.all([pokeApi, pokeMine])
         .then(response => {
-            let [ pokeMineRes] = response;
-            return pokeMineRes
+            let [ pokeApiRes, pokeMineRes] = response;
+            return pokeApiRes.concat(pokeMineRes);
         })
         .then(pokeList => res.send(pokeList));
 };
 
 function getPokemonByID(req, res, next) {
-    const {idPokemon} = req.params;
+    const idPokemon = req.params.idPokemon;
+    //console.log(req.params.idPokemon)
+    
+    //if(isNumber){} => busco api
+    //if(isUUid){} => busco db
 
     return axios.get(`${API_HOME}/${idPokemon}`)
-        .then(response => res.json(response.data.stats))
+        .then(response => res.json(response.data.stats)) //aca me tengor que traer los stats de cad apokemon
 };
 
 async function createPokemon(req, res, next) {
@@ -60,7 +86,7 @@ async function createPokemon(req, res, next) {
             weight,
             spriteSrc
         });
-        res.json(newPokemon)
+        res.json(newPokemon) //falta .add o settpyes los types en la db
     } catch(err) {
         console.error(err);
     }
