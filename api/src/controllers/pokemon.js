@@ -16,7 +16,7 @@ async function getApi() {
     const pokemonsList = await axios.get(`${API_HOME}?limit=40`)
     let pokemonsData = [];
 
-    for(obj of pokemonsList.data.results) {
+    for(obj of pokemonsList.data.results) { 
         let dataObj = await axios.get(`${obj.url}`);
         pokemonsData.push({
             id: dataObj.data.id,
@@ -48,18 +48,18 @@ async function getAllPokemons(req, res, next) {
     Promise.all([pokeApi, pokeMine])
         .then(response => {
             let [ pokeApiRes, pokeMineRes] = response;
-            return res.json(pokeApiRes.concat(pokeMineRes));
+            return pokeApiRes.concat(pokeMineRes);
         })
-        /*
         .then(pokeList => { // [{api},{mine},{mine}] -> lista completa
             //searchByName
             if(name) {
                 const pokemonSearch = pokeList.find(p => p.name === name.toLowerCase());
-                res.json(pokemonSearch);
+                return res.json(pokemonSearch);
             }
             //byusers
-            //buyapi
-        });*/
+            //byapi
+            return res.json(pokeList);
+        });
 
 };
 
@@ -134,7 +134,7 @@ async function createPokemon(req, res, next) {
 
     //if(buscar si el name ingresado ya existe en api o db?)
     try {
-        let newPokemon = await Pokemon.create({
+        let newPokemon = await Pokemon.create({ //tabla pokemon-----poketype-------types
             id: uuidv4(),
             name: name.toLowerCase(), 
             hp,
@@ -146,7 +146,7 @@ async function createPokemon(req, res, next) {
             img
         });
         //await newPokemon.setTypes(types);//.add o settpyes los types en la db
-        await newPokemon.addTypes(types);
+        //await newPokemon.addTypes(types);
         console.log(newPokemon);
         return res.json(newPokemon);
     } catch(err) {

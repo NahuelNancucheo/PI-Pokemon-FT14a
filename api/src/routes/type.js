@@ -1,9 +1,9 @@
 const { Router } = require('express');
 const router = Router();
 //importar controladores correspondientes
-const {getAllTypes} = require('../controllers/type');
+const {getAllTypes, typesDB} = require('../controllers/type');
 
-router.get('/', getAllTypes);
+router.get('/', typesDB);
 
 
 module.exports = router;
