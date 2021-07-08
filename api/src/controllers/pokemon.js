@@ -145,14 +145,30 @@ async function createPokemon(req, res, next) {
             weight,
             img
         });
-        //await newPokemon.setTypes(types);//.add o settpyes los types en la db
+        newPokemon.setTypes(types);//.add o settpyes los types en la db 
         //await newPokemon.addTypes(types);
-        console.log(newPokemon);
+        //console.log(newPokemon);
         return res.json(newPokemon);
     } catch(err) {
         console.error(err);
         next(err);
     }
+    /*
+    "types": [
+            {
+                "id": 3,
+                "name": "flying",
+                "createdAt": "2021-07-07T21:19:21.296Z",
+                "updatedAt": "2021-07-07T21:19:21.296Z",
+                "poketype": {
+                    "createdAt": "2021-07-07T21:19:26.800Z",
+                    "updatedAt": "2021-07-07T21:19:26.800Z",
+                    "pokemonId": "7b4e1b5f-3a5c-4f4a-8c7e-12318118ef8b",
+                    "typeId": 3
+                }
+            }
+        ]
+    */
 
 };
 
