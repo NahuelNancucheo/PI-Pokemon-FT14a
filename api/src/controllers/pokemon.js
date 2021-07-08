@@ -1,7 +1,7 @@
 const axios = require('axios');
-const {v4: uuidv4} = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 const { Pokemon, Type } = require('../db');
-const { API_HOME } = require('../constants');
+const { API_HOME, SERVER_PORT,SERVER_URL } = require('../constants');
 
 /*
 -get all pokemons -> concatenar api con db(recibo por query)
@@ -13,130 +13,115 @@ const { API_HOME } = require('../constants');
 //como hacer para no hacer tantos request
 async function getApi() {
     try {
-    const pokemonsList = await axios.get(`${API_HOME}?limit=40`)
-    let pokemonsData = [];
+        const pokemonsList = await axios.get(`${API_HOME}?limit=40`)
+        let pokemonsData = [];
 
-    for(obj of pokemonsList.data.results) { 
-        let dataObj = await axios.get(`${obj.url}`);
-        pokemonsData.push({
-            id: dataObj.data.id,
-            name: dataObj.data.forms[0].name,
-            img: dataObj.data.sprites.other.dream_world.front_default,
-            height: dataObj.data.height,
-            weight: dataObj.data.weight,
-            hp: dataObj.data.stats[0].base_stat,
-            attack: dataObj.data.stats[1].base_stat,
-            defense: dataObj.data.stats[2].base_stat,
-            speed: dataObj.data.stats[5].base_stat,
-            types: dataObj.data.types.map((t) => t.type.name)
-        })
-    }
-    return pokemonsData;
-    } catch(err) {
+        for (obj of pokemonsList.data.results) {
+            let dataObj = await axios.get(`${obj.url}`);
+            pokemonsData.push({
+                id: dataObj.data.id,
+                name: dataObj.data.forms[0].name,
+                img: dataObj.data.sprites.other.dream_world.front_default,
+                height: dataObj.data.height,
+                weight: dataObj.data.weight,
+                hp: dataObj.data.stats[0].base_stat,
+                attack: dataObj.data.stats[1].base_stat,
+                defense: dataObj.data.stats[2].base_stat,
+                speed: dataObj.data.stats[5].base_stat,
+                types: dataObj.data.types.map((t) => t.type.name)
+            })
+        }
+        return pokemonsData;
+    } catch (err) {
         console.log(err);
     }
-    
+
 };
 
 async function getAllPokemons(req, res, next) {
-    const name = req.query.name;
+    const {name, filter = null} = req.query;
     //busco en api
-    const pokeApi = await getApi() ;
+    const pokeApi = await getApi();
     //busco en db
-    const pokeMine = await Pokemon.findAll({include: Type});
-    
+    const pokeMine = await Pokemon.findAll({ include: Type });
+
     Promise.all([pokeApi, pokeMine])
         .then(response => {
-            let [ pokeApiRes, pokeMineRes] = response;
+            let [pokeMineRes, pokeApiRes] = response;
             return pokeApiRes.concat(pokeMineRes);
         })
-        .then(pokeList => { // [{api},{mine},{mine}] -> lista completa
+        .then(pokeList => { //-> lista completa de pokemons
             //searchByName
             if(name) {
                 const pokemonSearch = pokeList.find(p => p.name === name.toLowerCase());
                 return res.json(pokemonSearch);
-            }
-            //byusers
-            //byapi
-            return res.json(pokeList);
+            };
+
+            //filter byusers
+            if(filter === 'byUsers') {
+                pokeList = pokeList.filter(e => !Number.isInteger(e.id))
+            };
+
+            //filter byapi
+            if(filter === 'byApi') {    
+                pokeList = pokeList.filter(e => Number.isInteger(e.id))
+            };
+
+            const limitedPokeList = pokeList.slice(0, 12);
+            return res.json(limitedPokeList);
         });
 
 };
 
 function getPokemonByID(req, res, next) {
     const idPokemon = req.params.id;
-    //testeo que me mandan por params
+    //testeo regExp que me mandan por params
     const numberTest = /^[0-9]+$/.test(idPokemon);
     const uuidTest = /[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}/.test(idPokemon);
-    
-    
-        axios.get(`${API_HOME}/${idPokemon}`)
-        .then(r => {
-            let pokemon = {
-                id: r.data.id,
-                name: r.data.forms[0].name,
-                img: r.data.sprites.other.dream_world.front_default,
-                height: r.data.height,
-                weight: r.data.weight,
-                hp: r.data.stats[0].base_stat,
-                attack: r.data.stats[1].base_stat,
-                defense: r.data.stats[2].base_stat,
-                speed: r.data.stats[5].base_stat,
-                types: r.data.types.map(t => t.type.name)
-            }
-            res.send(pokemon);
-        })
-        //arreglar tantos catch
-        .catch((err) => {
-			Pokemon.findOne({
-				where: {
-					id: idPokemon,
-				},
-			})
-				.then((r) => {
-					res.send(r);
-				})
-				.catch((err) => {
-					res.status(200).send({error: 'pokemon not found'});
-				});
-		})
-		.catch((err) => {
-			res.status(400).send({error: err});
-		});
-    /*
-    else {
-        Pokemon.findByPk(idPokemon)
-        .then(r => res.json(r))
-        .catch(() => next({status: 404, message: 'Pokemon not found'}));
-    }
-    */
 
-    /*
-    if(uuidTest){
-        Pokemon.findOne({
-            where: {
-                id: idPokemon
-            }
-        })
-        .then(r => {res.send(r)})
-        .catch(() => next({status: 404, message: 'Pokemon not found'}));
+    //if number = true
+    if (numberTest) {
+        return axios.get(`${API_HOME}/${idPokemon}`)
+            .then(r => {
+                let pokemon = {
+                    id: r.data.id,
+                    name: r.data.forms[0].name,
+                    img: r.data.sprites.other.dream_world.front_default,
+                    height: r.data.height,
+                    weight: r.data.weight,
+                    hp: r.data.stats[0].base_stat,
+                    attack: r.data.stats[1].base_stat,
+                    defense: r.data.stats[2].base_stat,
+                    speed: r.data.stats[5].base_stat,
+                    types: r.data.types.map(t => t.type.name)
+                }
+                res.json(pokemon);
+            })
+            .catch(() => {
+                next({ status: 404, message: 'Pokemon not found' })
+            })
     };
-    
-    return next({
-        status: 404,
-        message: 'That pokemon does not exist, yet'
-    });
-    */
+
+    //if uuid = true
+    if (uuidTest) {
+        return Pokemon.findByPk(idPokemon, {include: Type})  // or Pokemon.findOne({ where: { id: idPokemon }, include: { model: Type } })
+            .then(r => res.json(r))
+            .catch(() => {
+                next({ status: 404, message: 'Pokemon not found' })
+            })
+    };
+
+    return next({ status: 404, message: 'That Pokemon does not exist' })
 };
 
 async function createPokemon(req, res, next) {
-    const {name, hp, attack, defense, speed, height, weight, types, img} = req.body;
+    const { name, hp, attack, defense, speed, height, weight, types, img } = req.body;
 
     //if(buscar si el name ingresado ya existe en api o db?)
     try {
-        let newPokemon = await Pokemon.create({ //tabla pokemon-----poketype-------types
+        let newPokemon = await Pokemon.create({
             id: uuidv4(),
-            name: name.toLowerCase(), 
+            name: name.toLowerCase(),
             hp,
             attack,
             defense,
@@ -145,15 +130,19 @@ async function createPokemon(req, res, next) {
             weight,
             img
         });
-        newPokemon.setTypes(types);//.add o settpyes los types en la db 
-        //await newPokemon.addTypes(types);
-        //console.log(newPokemon);
+        await newPokemon.setTypes(types);
+        //agrego los types del newpokemon 
+        let type = await newPokemon.getTypes({ attributes: ['name', 'id'] });
+        type = type.map(t => t.name);
+        newPokemon = { ...newPokemon.dataValues, types: type };
+        //retorno el newpokemon completo
         return res.json(newPokemon);
-    } catch(err) {
+    } catch (err) {
         console.error(err);
         next(err);
     }
     /*
+    newPokemon.types -> .map(e=>e.name)
     "types": [
             {
                 "id": 3,
