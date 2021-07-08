@@ -3,13 +3,6 @@ const { v4: uuidv4 } = require('uuid');
 const { Pokemon, Type } = require('../db');
 const { API_HOME, SERVER_PORT,SERVER_URL } = require('../constants');
 
-/*
--get all pokemons -> concatenar api con db(recibo por query)
--get pokemons por id 
--get pokemons por name
--crear pokemon -> que no se repita el name //controlar que pase el name por body
-*/
-
 //como hacer para no hacer tantos request
 async function getApi() {
     try {
@@ -117,7 +110,6 @@ function getPokemonByID(req, res, next) {
 async function createPokemon(req, res, next) {
     const { name, hp, attack, defense, speed, height, weight, types, img } = req.body;
 
-    //if(buscar si el name ingresado ya existe en api o db?)
     try {
         let newPokemon = await Pokemon.create({
             id: uuidv4(),
@@ -160,6 +152,15 @@ async function createPokemon(req, res, next) {
     */
 
 };
+
+/*TARDA MUCHO LA VERIFICACION
+async function nameVerifier(name) {
+    return axios.get(`${SERVER_URL}:${SERVER_PORT}/pokemons`)
+    .then(r => r.data)
+    .then(namesList => namesList.find(el => el.name === name))
+    .catch(err => console.error(err))
+};
+*/
 
 module.exports = {
     getAllPokemons,
