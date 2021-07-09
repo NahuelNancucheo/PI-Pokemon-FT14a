@@ -1,8 +1,9 @@
 const { default: axios } = require('axios');
 const { Type } = require('../db');
 const { API_TYPES } = require('../constants');
-
-const typesdb = axios.get(`${API_TYPES}`)
+/*
+const typesdb = axios
+    .get(`${API_TYPES}`)
     .then(response => {
         const types = response.data.results
 
@@ -15,6 +16,7 @@ const typesdb = axios.get(`${API_TYPES}`)
     .catch(err => res.send(err))
 
 Promise.all([typesdb]).then(() => console.log('types loaded in db'))
+*/
 
 function getAllTypes(req, res, next) {
     Type.findAll()

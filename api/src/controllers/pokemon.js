@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { v4: uuidv4 } = require('uuid');
 const { Pokemon, Type } = require('../db');
-const { API_HOME, SERVER_PORT,SERVER_URL } = require('../constants');
+const { API_HOME } = require('../constants');
 
 //como hacer para no hacer tantos request
 async function getApi() {
@@ -31,12 +31,12 @@ async function getApi() {
 
 };
 
-async function getAllPokemons(req, res, next) {
+async function getAllPokemons(req, res, next) { // get /pokemons?name=algo
     const {name, filter = null} = req.query;
     //busco en api
     const pokeApi = await getApi();
     //busco en db
-    const pokeMine = await Pokemon.findAll({ include: Type });
+    const pokeMine = await Pokemon.findAll({ include: {model: Type, where:{attributes:['name', 'id']}}});
 
     Promise.all([pokeApi, pokeMine])
         .then(response => {
@@ -48,7 +48,10 @@ async function getAllPokemons(req, res, next) {
             if(name) {
                 const pokemonSearch = pokeList.find(p => p.name === name.toLowerCase());
                 return res.json(pokemonSearch);
-            };
+            } /*else { //tengo que buscar en la api 
+                const pokemonsSearch = axios.get(`${API_HOME}?/${name}`)
+                return res.json(pokemonsSearch);
+            }*/
 
             //filter byusers
             if(filter === 'byUsers') {
@@ -63,6 +66,7 @@ async function getAllPokemons(req, res, next) {
             const limitedPokeList = pokeList.slice(0, 12);
             return res.json(limitedPokeList);
         });
+       
 
 };
 
