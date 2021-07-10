@@ -35,8 +35,11 @@ async function getAllPokemons(req, res, next) { // get /pokemons?name=algo
     const {name, filter = null} = req.query;
     //busco en api
     const pokeApi = await getApi();
-    //busco en db
-    const pokeMine = await Pokemon.findAll({ include: {model: Type, where:{attributes:['name', 'id']}}});
+    //busco en db//PROBAR EN POSTMAN
+    const pokeMine = await Pokemon.findAll({ include: [
+        { model: Type, attributes: ["name"], through: { attributes: [] } }
+      ]
+    });
 
     Promise.all([pokeApi, pokeMine])
         .then(response => {
@@ -50,7 +53,7 @@ async function getAllPokemons(req, res, next) { // get /pokemons?name=algo
                 return res.json(pokemonSearch);
             } /*else { //tengo que buscar en la api 
                 const pokemonsSearch = axios.get(`${API_HOME}?/${name}`)
-                return res.json(pokemonsSearch);
+                return res.json(pokemonsSearch); ->preguntarle a wanda
             }*/
 
             //filter byusers
@@ -113,7 +116,13 @@ function getPokemonByID(req, res, next) {
 
 async function createPokemon(req, res, next) {
     const { name, hp, attack, defense, speed, height, weight, types, img } = req.body;
-
+    /*
+    nameExist = await Pokemon.findOne({where:{name:name}})
+    if(nameExist) {
+        return res.status(404).send('el pokemon ya existe') -> ver que hacer segun lo que dice el readme y wanda
+    }
+    
+    */
     try {
         let newPokemon = await Pokemon.create({
             id: uuidv4(),
@@ -126,6 +135,12 @@ async function createPokemon(req, res, next) {
             weight,
             img
         });
+        /*  
+        const matchinTypes = await Type.findAll({where:{name: types}})
+        await newPokemon.setTypes(matchingTypes)
+        newPokemon = {...newPokemon.dataValues, types: matchingTypes}
+        return res.json(newPokemon)
+        */
         await newPokemon.setTypes(types);
         //agrego los types del newpokemon 
         let type = await newPokemon.getTypes({ attributes: ['name', 'id'] });
