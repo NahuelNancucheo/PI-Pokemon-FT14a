@@ -32,7 +32,7 @@ async function getApi() {
 };
 
 async function getAllPokemons(req, res, next) { // get /pokemons?name=algo
-    const {name, filter = null} = req.query;
+    const {name, filter = null} = req.query; //page=, limit=cant a mostrar
     //busco en api
     const pokeApi = await getApi();
     //busco en db//PROBAR EN POSTMAN
