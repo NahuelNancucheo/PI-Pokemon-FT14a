@@ -21,7 +21,7 @@ async function getApi() {
                 attack: dataObj.data.stats[1].base_stat,
                 defense: dataObj.data.stats[2].base_stat,
                 speed: dataObj.data.stats[5].base_stat,
-                types: dataObj.data.types.map((t) => t.type.name)
+                types: dataObj.data.types.map((t) =>{return {name:t.type.name}})//types: dataObj.data.types.map((t) => t.type.name)->si quiero asi, tengo que arreglar el create seq o el findall//
             })
         }
         return pokemonsData;
@@ -31,12 +31,12 @@ async function getApi() {
 
 };
 
-async function getAllPokemons(req, res, next) { // get /pokemons?name=algo
-    const {name, filter = null} = req.query; //page=, limit=cant a mostrar
+async function getAllPokemons(req, res, next) {
+    const {name, filter = null} = req.query;
     //busco en api
     const pokeApi = await getApi();
-    //busco en db//PROBAR EN POSTMAN
-    const pokeMine = await Pokemon.findAll({ include: [
+    //busco en db
+    let pokeMine = await Pokemon.findAll({ include: [
         { model: Type, attributes: ["name"], through: { attributes: [] } }
       ]
     });
@@ -66,8 +66,7 @@ async function getAllPokemons(req, res, next) { // get /pokemons?name=algo
                 pokeList = pokeList.filter(e => Number.isInteger(e.id))
             };
 
-            const limitedPokeList = pokeList.slice(0, 12);
-            return res.json(limitedPokeList);
+            return res.json(pokeList);
         });
        
 
@@ -117,7 +116,7 @@ function getPokemonByID(req, res, next) {
 async function createPokemon(req, res, next) {
     const { name, hp, attack, defense, speed, height, weight, types, img } = req.body;
     /*
-    nameExist = await Pokemon.findOne({where:{name:name}})
+    nameExist = await Pokemon.findOne({where:{name:name}}) ---> de esta manera
     if(nameExist) {
         return res.status(404).send('el pokemon ya existe') -> ver que hacer segun lo que dice el readme y wanda
     }
@@ -134,42 +133,18 @@ async function createPokemon(req, res, next) {
             height,
             weight,
             img
-        });
-        /*  
-        const matchinTypes = await Type.findAll({where:{name: types}})
+        });  
+
+        let matchingTypes = await Type.findAll({where:{name: types}})
         await newPokemon.setTypes(matchingTypes)
+        matchingTypes = matchingTypes.map(t => {return {name: t.dataValues.name}})//
         newPokemon = {...newPokemon.dataValues, types: matchingTypes}
-        return res.json(newPokemon)
-        */
-        await newPokemon.setTypes(types);
-        //agrego los types del newpokemon 
-        let type = await newPokemon.getTypes({ attributes: ['name', 'id'] });
-        type = type.map(t => t.name);
-        newPokemon = { ...newPokemon.dataValues, types: type };
         //retorno el newpokemon completo
         return res.json(newPokemon);
     } catch (err) {
         console.error(err);
         next(err);
     }
-    /*
-    newPokemon.types -> .map(e=>e.name)
-    "types": [
-            {
-                "id": 3,
-                "name": "flying",
-                "createdAt": "2021-07-07T21:19:21.296Z",
-                "updatedAt": "2021-07-07T21:19:21.296Z",
-                "poketype": {
-                    "createdAt": "2021-07-07T21:19:26.800Z",
-                    "updatedAt": "2021-07-07T21:19:26.800Z",
-                    "pokemonId": "7b4e1b5f-3a5c-4f4a-8c7e-12318118ef8b",
-                    "typeId": 3
-                }
-            }
-        ]
-    */
-
 };
 
 /*TARDA MUCHO LA VERIFICACION
@@ -180,6 +155,13 @@ async function nameVerifier(name) {
     .catch(err => console.error(err))
 };
 */
+       /*
+        await newPokemon.setTypes(types);
+        //agrego los types del newpokemon 
+        let type = await newPokemon.getTypes({ attributes: ['name', 'id'] });
+        type = type.map(t => t.name);
+        newPokemon = { ...newPokemon.dataValues, types: type };
+        */
 
 module.exports = {
     getAllPokemons,

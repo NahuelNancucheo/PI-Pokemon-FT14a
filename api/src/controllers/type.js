@@ -18,6 +18,7 @@ const typesdb = axios
 Promise.all([typesdb]).then(() => console.log('types loaded in db'))
 */
 
+
 function getAllTypes(req, res, next) {
     Type.findAll()
         .then((response) => res.json(response))
@@ -27,20 +28,3 @@ function getAllTypes(req, res, next) {
 module.exports = {
     getAllTypes
 }
-
-/*
-function typesDB(req, res, next) {
-    axios.get(`${API_TYPES}`)
-    .then(response => {
-        const types = response.data.results
-
-        types.forEach(e => {
-            Type.create({name: e.name})
-            .catch(err => res.send(err))
-        })
-        return res.status(200).json(types)
-    })
-    .catch(err => res.send(err))
-
-};
-*/
