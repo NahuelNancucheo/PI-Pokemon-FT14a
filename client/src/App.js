@@ -16,11 +16,6 @@ function App() {
     <div className="App">
       <h1>Henry Pokemon</h1>
       <Route exact path='/' component={LandingPage} />
-      <Route path='/home' component={Nav} />
-      <Route exact path='/home/pokemons' component={Home} />
-      <Route exact path='/home/pokemons/:id' component={Specs} />
-      <Route exact path='/home/pokemons/create' component={CreatePokemon} />
-      <Route exact path='/home/pokemons/search' component={Search} />
     </div>
   );
 }
@@ -46,5 +41,10 @@ import reducer from ./reducers
 import thunk from redux-thunk
 
 
+      <Route path='/home' component={Nav} />
+      <Route exact path='/home/pokemons' component={Home} />
+      <Route exact path='/home/pokemons/:id' component={Specs} />
+      <Route exact path='/home/pokemons/create' component={CreatePokemon} />
+      <Route exact path='/home/pokemons/search' component={Search} />
 
 */
