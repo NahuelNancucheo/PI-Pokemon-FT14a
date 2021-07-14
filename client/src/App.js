@@ -18,9 +18,9 @@ function App() {
       <Route exact path='/' component={LandingPage} />
 
       <Route exact path='/home/pokemons' component={Home} />
-
-
-      <Route exact path='/home/pokemons/search' component={Search} />
+      <Route exact path='/home/pokemons/:id' component={Specs} />
+      <Route exact path='/home/pokemon/create' component={CreatePokemon} />
+      <Route exact path='/home/pokemon/search' component={Search} />
     </div>
   );
 }
@@ -28,7 +28,7 @@ function App() {
 export default App;
 
 /*
-import characterCards from './modules/characterscards
+import characterCardfrom './modules/characterscards
 ----------------
 crear constants.js -> local host 3001 (mi backend)
 ---------------
@@ -48,8 +48,8 @@ import thunk from redux-thunk
 
       <Route path='/home' component={Nav} />
       
-      <Route exact path='/home/pokemons/:id' component={Specs} />
-      <Route exact path='/home/pokemons/create' component={CreatePokemon} />
+  
+      
       
 
 */

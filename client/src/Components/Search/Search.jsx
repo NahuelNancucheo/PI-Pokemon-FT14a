@@ -29,6 +29,7 @@ function Search() {
     }, []);
 
     return (
+    <div className='home'>
         <div className='search-bar'>
             <form onSubmit={e => handleSubmit(e)}>
                 <input 
@@ -41,13 +42,14 @@ function Search() {
                 <input className='input-btn' type='submit' value='Buscar' />
             </form>
             <div>
-            {pokemonSearch.error ? (
+            {pokemonSearch ? (
                 <h2 className='notFound'>{pokemonSearch.error}</h2>
             ) : (
                 <Caracs pokemon={pokemonSearch} />
             )}
             </div>
         </div>
+    </div>
     );  
 };
 

@@ -37,38 +37,30 @@ export function addPokemon(specs) {
 };
 
 export function getTypes() {
-    return (dispatch) => {
-        return axios.get(`${BACKEND}/types`)
-        .then(r => {
-            dispatch({type: GET_TYPES, payload: r.data})
-        })
+    return async (dispatch) => {
+        const r = await axios.get(`${BACKEND}/types`);
+        dispatch({ type: GET_TYPES, payload: r.data });
     }
 };
 
 export function getPokemons() {
-    return (dispatch) => {
-        return axios.get(`${BACKEND}/pokemons`)
-        .then(r => {
-            dispatch({type: GET_POKEMONES, payload: r.data})
-        })
+    return async (dispatch) => {
+        const r = await axios.get(`${BACKEND}/pokemons`);
+        dispatch({ type: GET_POKEMONES, payload: r.data });
     }
 };
 
 export function getPokemonName(name) {
-    return (dispatch) => {
-        return axios.get(`${BACKEND}/pokemons?name=${name}`)
-        .then(r => {
-            dispatch({type: GET_POKEMON_NAME, payload: r.data})
-        })
+    return async (dispatch) => {
+        const r = await axios.get(`${BACKEND}/pokemons?name=${name}`);
+        dispatch({ type: GET_POKEMON_NAME, payload: r.data });
     }
 };
 
 export function getPokemonById(id) {
-    return (dispatch) => {
-        return axios.get(`${BACKEND}/pokemons/${id}`)
-        .then(r => {
-            dispatch({type: GET_POKEMON_ID, payload: r.data})
-        })
+    return async (dispatch) => {
+        const r = await axios.get(`${BACKEND}/pokemons/${id}`);
+        dispatch({ type: GET_POKEMON_ID, payload: r.data });
     }
 };
 

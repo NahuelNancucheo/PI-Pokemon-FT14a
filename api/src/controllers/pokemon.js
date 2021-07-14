@@ -136,8 +136,9 @@ async function createPokemon(req, res, next) {
         });  
 
         let matchingTypes = await Type.findAll({where:{name: types}})
+        
         await newPokemon.setTypes(matchingTypes)
-        matchingTypes = matchingTypes.map(t => {return {name: t.dataValues.name}})//
+        matchingTypes = matchingTypes.map(t => {return {name: t.dataValues.name, id: t.dataValues.id}})//
         newPokemon = {...newPokemon.dataValues, types: matchingTypes}
         //retorno el newpokemon completo
         return res.json(newPokemon);

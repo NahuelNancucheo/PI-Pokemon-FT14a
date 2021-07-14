@@ -34,7 +34,7 @@ export default function rootReducer(state = initialData, action) {
             return {
                 ...state,
                 pokemonsShowed: action.payload,
-                //pokemonsFiltered: action.payload
+                pokemonsFiltered: action.payload
             }
 
         case GET_POKEMON_NAME:
@@ -51,11 +51,11 @@ export default function rootReducer(state = initialData, action) {
         
         case FILTER_TYPE_POKEMON:
             if(action.payload === 'all') {
-                return {...state, pokemonsShowed: state.pokemonsShowed}
+                return {...state, pokemonsShowed: state.pokemonsFiltered}
             } else {
                 return {
                     ...state, 
-                    pokemonsShowed: state.pokemonsShowed.filter(el => 
+                    pokemonsShowed: state.pokemonsFiltered.filter(el => 
                         el.types.includes(action.payload)
                         )
                     };

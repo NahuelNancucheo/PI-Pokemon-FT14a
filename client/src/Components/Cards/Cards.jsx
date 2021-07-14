@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 //import card adn styles
+import Card from '../Card/Card';
 
-function Cards({show, loading}) {
-    if(loading) {
-        return <h2>Loading...</h2>
-    }
+function Cards({show}) {
+
 
     return (
         <div>
-            {show.map((p => (
-                <div key={p.id}>
-                    <p>{p.name}</p>
-                    <img src={`${p.img}`} alt={`${p.name} img`}/>
-                    <p>{p.id}</p>
-                    <p>{p.types.map(t => t.name)}</p>
-                </div>
+            {show && show.map((p => (
+                <li key={p.id}>
+                    <Card
+                        name={p.name}
+                        img={p.img}
+                        id={p.id}
+                        types={p.types}
+                    />
+                </li>
             )))}
         </div>
     )

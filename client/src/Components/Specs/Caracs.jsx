@@ -13,14 +13,35 @@ function Caracs(props) {
                     <img src={`${img}`} alt='pokemon-img' />
                     <div className='stats'>
                     <h2>{name}</h2>
+                    <p>
+                        <span>Vida: </span>
+                        {hp}
+                    </p>
+                    <p>
+                        <span>Ataque: </span>
+                        {attack}
+                    </p>
+                    <p>
+                        <span>Defensa: </span>
+                        {defense}
+                    </p>
+                    <p>
+                        <span>Velocidad: </span>
+                        {speed}
+                    </p>
+                    <p>
+                        <span>Altura: </span>
+                        {height}
+                    </p>
+                    <p>
+                        <span>Peso: </span>
+                        {weight}
+                    </p>
+                    <p>
+                        <span>ID: </span>
+                        {id}
+                    </p>
                     <h2>{types && types.map(t => t.name)}</h2>
-                    <h2>{hp}</h2>
-                    <h2>{attack}</h2>
-                    <h2>{defense}</h2>
-                    <h2>{speed}</h2>
-                    <h2>{height}</h2>
-                    <h2>{weight}</h2>
-                    <h2>{id}</h2> 
                     </div>
                 </div>
             )}

@@ -9,26 +9,33 @@ import {
 } from '../../actions/index';
 
 function Filter() {
+    const [order, setOrder] = useState('');
+    const [filterTypes, setFilterTypes] = useState('all');
 
 
     const types = useSelector(store => store.types);
     const dispatch = useDispatch();
 
     const handleChangeTypes = (e) => { //by type
-
+        setFilterTypes(e.target.value);
     };
 
     const handleChangeOrder = (e) => { //sort
-
+        setOrder(e.target.value);
     };
     //by api
     //by users
+
+    useEffect(() => {
+        dispatch(sortPokemons(order));
+        dispatch(filterPokemonsByType(filterTypes));
+    }, [order, filterTypes]);
 
     return (
         <div className='filters'>
             <div className='sort'>
                 <label htmlFor='order'>Ordenar por</label>
-                <select name='order' >
+                <select name='order' onChange={handleChangeOrder} >
                     <option value='none' >None</option>
                     <option value='high-low'>Mas fuerte</option>
                     <option value='low-high'>Mas debil</option>
@@ -46,9 +53,11 @@ function Filter() {
             </div>
             <div className='types'>
                 <label htmlFor='types'>Filtrar por tipos</label>
-                <select name='filter' >
+                <select name='Types' onChange={handleChangeTypes} >
                     <option value='all'>Todos</option>
-                    {}
+                    {types && types.map(t => (
+                        <option key={`${t.name}`} value={`${t.name}`}>{`${t.name}`}</option>
+                    ))}
                 </select>
             </div>
         </div>
