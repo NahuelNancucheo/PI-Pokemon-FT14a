@@ -6,7 +6,7 @@ function Card({name, img, id, types}) {
 
     return (
         <div className='card'>
-            <img src={`${img}`} alt={`${name} image`}/>
+            {img ? (<img src={`${img}`} alt={`${name} image`}/>) : (<img src='https://quizizz.com/media/resource/gs/quizizz-media/quizzes/64b606bc-b417-40fd-aabc-f86810fe4399?w=200&h=200' alt='not found'/>)}
             <p className='name'>{id}</p>
             <p className='name'>{name}</p>
             <div className='types'>

@@ -6,7 +6,7 @@ import {addPokemon, getTypes} from '../../actions/index';
 export function validate(input) {
     let errors = {};
     for(let key in input) {
-        if(key !== 'name') {
+        if(key !== 'name' && key !== 'img') {
             if(!input[key]) {
                 errors[key] = 'is required';
             } else if(isNaN(input[key])) {
@@ -15,9 +15,9 @@ export function validate(input) {
         } else {
             if(!input[key]) {
                 errors[key] = 'name is required'
-            } else if(/\d/.test(input[key])) {
+            } /*else if(/\d/.test(input[key])) { //ver como hacer para que me valide el link
                 errors[key] = 'only letters';
-            }
+            }*/
         }
     }
     return errors;
@@ -32,7 +32,8 @@ export default function CreatePokemon() {
         defense:'',
         speed:'',
         height:'',
-        weight:''
+        weight:'',
+        img: ''
     });
 
     const [types, setTypes] = useState([]);
@@ -79,7 +80,8 @@ export default function CreatePokemon() {
                 defense:'',
                 speed:'',
                 height:'',
-                weight:''
+                weight:'',
+                img:''
             });
             setTypes([]);
             e.target.reset();
@@ -175,6 +177,19 @@ export default function CreatePokemon() {
                         />
                         {error.weight && <span>{error.weight}</span>}
                     </div>
+
+                    <div className='stat'>
+                        <label>Image Link: </label>
+                        <input
+                            name='img'
+                            type='text'
+                            value={inputs.img}
+                            placeholder='img link...'
+                            onChange={handleInputChange}
+                        />
+                        {error.img && <span>{error.img}</span>}
+                    </div>
+
                     <h2>Tipos</h2>
                     <div className='input-types'>
                         {typesDB && typesDB.map(t => (
