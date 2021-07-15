@@ -2,19 +2,22 @@ import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {
     sortPokemons,
-    filterByApi,
-    filterByUsers,
-    filterPokemonsByType
-
+    filterPokemonsByOrigin,
+    filterPokemonsByType,
 } from '../../actions/index';
 
 function Filter() {
     const [order, setOrder] = useState('');
     const [filterTypes, setFilterTypes] = useState('all');
+    const [filter, setFilter] = useState('all');
 
 
     const types = useSelector(store => store.types);
     const dispatch = useDispatch();
+
+    const handleChangeFilter = (e) => {
+        setFilter(e.target.value);
+    };
 
     const handleChangeTypes = (e) => { //by type
         setFilterTypes(e.target.value);
@@ -23,13 +26,12 @@ function Filter() {
     const handleChangeOrder = (e) => { //sort
         setOrder(e.target.value);
     };
-    //by api
-    //by users
 
     useEffect(() => {
-        dispatch(sortPokemons(order));
+        dispatch(filterPokemonsByOrigin(filter));
         dispatch(filterPokemonsByType(filterTypes));
-    }, [order, filterTypes]);
+        dispatch(sortPokemons(order));
+    }, [filter, filterTypes, order]);
 
     return (
         <div className='filters'>
@@ -45,10 +47,10 @@ function Filter() {
             </div>
             <div className='origin'>
                 <label htmlFor='filter'>Filtrar por Origen</label>
-                <select name='filter' >
-                    <option>All</option>
-                    <option>Pokemons by Users</option>
-                    <option>Pokemons by Api</option>
+                <select name='filter' onChange={handleChangeFilter} >
+                    <option value='all'>All</option>
+                    <option value='created'>Pokemons by Users</option>
+                    <option value='exists'>Pokemons by Api</option>
                 </select>
             </div>
             <div className='types'>

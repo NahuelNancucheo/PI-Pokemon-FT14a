@@ -49,9 +49,14 @@ async function getAllPokemons(req, res, next) {
         .then(pokeList => { //-> lista completa de pokemons
             //searchByName
             if(name) {
-                const pokemonSearch = pokeList.find(p => p.name === name.toLowerCase());
-                return res.json(pokemonSearch);
-            } /*else { //tengo que buscar en la api 
+                const pokemonSearch = pokeList.find(p => p.name === name.toLowerCase()); //catchear con next
+                if(pokemonSearch) {
+                    return res.json(pokemonSearch);
+                } else {
+                    next({ status: 404, message: 'Pokemon not found' })//catchea el error?
+                }
+            }
+            /*else { //tengo que buscar en la api 
                 const pokemonsSearch = axios.get(`${API_HOME}?/${name}`)
                 return res.json(pokemonsSearch); ->preguntarle a wanda
             }*/
@@ -67,9 +72,10 @@ async function getAllPokemons(req, res, next) {
             };
 
             return res.json(pokeList);
-        });
-       
-
+        })
+        .catch(() => {
+            next({ status: 404, message: 'Pokemon not found' })
+        })
 };
 
 function getPokemonByID(req, res, next) {

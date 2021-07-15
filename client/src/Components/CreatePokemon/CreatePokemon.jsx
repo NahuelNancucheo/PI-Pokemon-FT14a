@@ -13,7 +13,7 @@ export function validate(input) {
                 errors[key] = 'must be a number';
             }
         } else {
-            if(!input[key]) {
+            if(!input[key] && key !== 'img') {
                 errors[key] = 'name is required'
             } /*else if(/\d/.test(input[key])) { //ver como hacer para que me valide el link
                 errors[key] = 'only letters';

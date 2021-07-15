@@ -25,7 +25,7 @@ const { API_TYPES } = require('../api/src/constants');
 const { Type } = require('../api/src/db');
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   console.log("correcta conexion con la base de datos")
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console

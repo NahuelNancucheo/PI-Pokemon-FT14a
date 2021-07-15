@@ -4,7 +4,6 @@ import {
     GET_POKEMON_ID,
     FILTER_TYPE_POKEMON,
     FILTER_ORIGIN_POKEMON,
-    FILTER_BY_ORIGIN_API,
     SORT_POKEMONS,
     ADD_POKEMON,
     GET_POKEMON_NAME,
@@ -64,6 +63,7 @@ export function getPokemonById(id) {
     }
 };
 
+
 export function filterPokemonsByType(type) {
     return {
         type: FILTER_TYPE_POKEMON,
@@ -71,6 +71,13 @@ export function filterPokemonsByType(type) {
     }
 };
 
+export function filterPokemonsByOrigin(type) {
+    return {
+        type: FILTER_ORIGIN_POKEMON,
+        payload: type
+    }
+};
+/*
 export function filterByApi() {
     return (dispatch) => {
         axios.get(`${BACKEND}/pokemons?filter=byApi`)
@@ -80,6 +87,7 @@ export function filterByApi() {
     }
 };
 
+
 export function filterByUsers() {
     return (dispatch) => {
         axios.get(`${BACKEND}/pokemons?filter=byUsers`)
@@ -88,7 +96,7 @@ export function filterByUsers() {
         })
     }
 };
-
+*/
 export function sortPokemons(type) {
     return {
         type: SORT_POKEMONS,

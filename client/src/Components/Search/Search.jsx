@@ -42,7 +42,7 @@ function Search() {
                 <input className='input-btn' type='submit' value='Buscar' />
             </form>
             <div>
-            {pokemonSearch ? (
+            {pokemonSearch.error ? (
                 <h2 className='notFound'>{pokemonSearch.error}</h2>
             ) : (
                 <Caracs pokemon={pokemonSearch} />

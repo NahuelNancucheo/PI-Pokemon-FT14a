@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import { Route } from 'react-router-dom';
 //Components
-import LandingPage from './Components/LandingPage/LandingPage';
+import LandingPage from './Components/LandingPage/LandingPage'
 import Nav from './Components/Nav/Nav';
 import Home from './Components/Home/Home';
 import Specs from './Components/Specs/Specs';
@@ -28,7 +28,7 @@ function App() {
 export default App;
 
 /*
-import characterCardfrom './modules/characterscards
+import characterCardfrom './modules/charactersca
 ----------------
 crear constants.js -> local host 3001 (mi backend)
 ---------------

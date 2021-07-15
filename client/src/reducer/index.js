@@ -3,7 +3,6 @@ import {
     GET_POKEMON_ID,
     FILTER_TYPE_POKEMON,
     FILTER_ORIGIN_POKEMON,
-    FILTER_BY_ORIGIN_API,
     SORT_POKEMONS,
     ADD_POKEMON,
     GET_POKEMON_NAME,
@@ -11,6 +10,18 @@ import {
     CLEAR_POKEMON_SEARCH,
     CLEAR_POKEMON_SPECS
 } from '../constants';
+
+function filterby(arr, field) {
+    let pokemonsF = [];
+    for(let i = 0; i < arr.length; i++) {
+        for(let j= 0; j < arr[i].types.length; j++) {
+            if(arr[i].types[j].name === field) {
+                pokemonsF.push(arr[i])
+            }
+        }
+    }
+    return pokemonsF;
+}
 
 const initialData = {
     pokemonsLoaded: [], //api
@@ -33,7 +44,9 @@ export default function rootReducer(state = initialData, action) {
         case GET_POKEMONES:
             return {
                 ...state,
+                pokemonsLoaded: action.payload.filter(el => typeof el.id === 'number'),
                 pokemonsShowed: action.payload,
+                myPokemons: action.payload.filter(el => typeof el.id === 'string'),
                 pokemonsFiltered: action.payload
             }
 
@@ -43,24 +56,39 @@ export default function rootReducer(state = initialData, action) {
         case GET_POKEMON_ID:
             return {...state, pokemonSpecs: action.payload};
 
-        case FILTER_BY_ORIGIN_API:
-            return {...state, pokemonsLoaded: action.payload};
-
         case FILTER_ORIGIN_POKEMON:
-            return {...state, myPokemons: action.payload};
-        
+            if(action.payload === 'created') {
+                return {...state, pokemonsFiltered: state.myPokemons};
+            } else if(action.payload === 'exists') {
+                return {...state, pokemonsFiltered: state.pokemonsLoaded};
+            } else {
+                return {...state, pokemonsFiltered:state.myPokemons.concat(state.pokemonsLoaded)};
+            }
+            
         case FILTER_TYPE_POKEMON:
+            if(action.payload === 'all') {
+                return {...state, pokemonsShowed: state.pokemonsFiltered}
+            } else {
+                let filteredPokemons = filterby(state.pokemonsFiltered, action.payload)
+                return {
+                    ...state,
+                    pokemonsShowed: filteredPokemons
+                }
+            }
+            
+            /*
             if(action.payload === 'all') {
                 return {...state, pokemonsShowed: state.pokemonsFiltered}
             } else {
                 return {
                     ...state, 
                     pokemonsShowed: state.pokemonsFiltered.filter(el => 
-                        el.types.includes(action.payload)
-                        )
-                    };
+                        el.types.includes(action.payload)//probar con algun type hardcodeado
+                    )
+                };
             }
-
+            */
+            
         case SORT_POKEMONS:
             if(action.payload === 'low-high') {
                 return {

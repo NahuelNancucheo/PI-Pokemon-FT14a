@@ -11,7 +11,7 @@ function LandingPage() {
     useEffect(() => {
         dispatch(getPokemons());
         dispatch(getTypes);
-    });
+    },[]);
 
     return (
         <section>

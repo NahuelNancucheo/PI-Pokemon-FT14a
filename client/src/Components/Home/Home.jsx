@@ -26,7 +26,7 @@ function Home() {
 
 export default Home;
 /*
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
     const [pokmnPerPage, setPokmnPerPage] = useState(12);
 
