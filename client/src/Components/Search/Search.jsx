@@ -9,6 +9,7 @@ function Search() {
 
     const dispatch = useDispatch();
     const pokemonSearch = useSelector(store => store.pokemonSearch);//buscarlo en la api o en los 40 que traigo?
+    //const pokemonsShowed = useSelector(store => store.pokemonsShowed)
 
     function handleChange(e) {
         setName(e.target.value);
@@ -16,6 +17,17 @@ function Search() {
 
     function handleSubmit(e) {
         e.preventDefault();
+        /*
+        const pokmnSearch = pokemonsShowed.find(p=>p.name === name.toLowerCase())
+        if(pokmnSearch) {
+            window.location.replace(`/home/pokemons/${pokmnSearch.id}`)
+            setName('')
+        } else {
+            dispatch(getPokemonName(name.toLowerCase()))
+            setName('')
+        }
+        */
+        
         if(name.length) {
             dispatch(getPokemonName(name.toLowerCase()));
             setName('');
@@ -42,8 +54,8 @@ function Search() {
                 <input className='input-btn' type='submit' value='Buscar' />
             </form>
             <div>
-            {pokemonSearch.error ? (
-                <h2 className='notFound'>{pokemonSearch.error}</h2>
+            {pokemonSearch.message ? (
+                <h2 className='notFound'>Loading...(aca iria un gif con wait a search)/ {pokemonSearch.message}</h2> 
             ) : (
                 <Caracs pokemon={pokemonSearch} />
             )}
@@ -54,3 +66,4 @@ function Search() {
 };
 
 export default Search;
+//{pokemonSearch.error}

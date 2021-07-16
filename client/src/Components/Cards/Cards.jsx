@@ -4,7 +4,6 @@ import Card from '../Card/Card';
 
 function Cards({show}) {
 
-
     return (
         <div>
             {show && show.map((p => (

@@ -71,7 +71,7 @@ export default function CreatePokemon() {
         e.preventDefault();
         let error = validate(inputs);
         if(!Object.keys(error).length && types.length) {
-            alert('Pokemon created');
+            alert('Pokemon created!');
             dispatch(addPokemon({...inputs, types: types.map(n => n)}))
             setInputs({
                 name:'',
@@ -86,7 +86,7 @@ export default function CreatePokemon() {
             setTypes([]);
             e.target.reset();
         } else {
-            alert('complete the form')
+            alert('Please, complete the form')
         }
     }
 

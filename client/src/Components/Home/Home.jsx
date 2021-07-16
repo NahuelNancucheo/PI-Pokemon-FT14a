@@ -5,37 +5,35 @@ import { getPokemons, getTypes } from '../../actions/index';
 //import components
 import Filters from '../Filters/Filters';
 import Cards from '../Cards/Cards';
-//import Pagination from '../Pagination/Pagination';
+import Pagination from '../Pagination/Pagination';
 
 function Home() {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pokmnPerPage, setPokmnPerPage] = useState(12);
+
     const dispatch = useDispatch();
-    const pokemonsShowed = useSelector(store => store.pokemonsShowed);
+    const pokemonsShowed = useSelector(store => store.pokemonsShowed);//aca tengo que usar los estados del store ya que los cargue en la alnding page
 
     useEffect(() => {
-        dispatch(getPokemons());
-        dispatch(getTypes());
+        //dispatch(getPokemons()); NO ES NECESARIO YA QUE LOS CARGUÉ EM LA LANDING PAGE :D
+        //dispatch(getTypes());
     },[]);
+
+    //get current pokemons
+    const indexOfLastPokmn = currentPage * pokmnPerPage;
+    const indexOfFirstPokmn = indexOfLastPokmn - pokmnPerPage;
+    const currentPokmn = pokemonsShowed.slice(indexOfFirstPokmn, indexOfLastPokmn);
+
+    //change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return(
         <div className='home'>
             <Filters />
-            <Cards className='card' show={pokemonsShowed}/>
+            {pokemonsShowed[0] ? (<Cards className='card' show={currentPokmn} />) : (<h2>Loading...</h2>)}
+            <Pagination pokmnPerPage={pokmnPerPage} totalPokmn={pokemonsShowed.length} paginate={paginate} />
         </div>
     );
 };
 
 export default Home;
-/*
-    const [loading, setLoading] = useState(false)
-    const [currentPage, setCurrentPage] = useState(1);
-    const [pokmnPerPage, setPokmnPerPage] = useState(12);
-
-    const indexOfLastPkmn = currentPage * pokmnPerPage;
-    const indexOfFirstPkmn = indexOfLastPkmn - pokmnPerPage;
-    const currentPokmn = pokemonsShowed.slice(indexOfFirstPkmn, indexOfLastPkmn);
-const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-<Pagination pokmnPerPage={pokmnPerPage} totalPokmn={pokemonsShowed.length} paginate={paginate} />
-
-*/
-
