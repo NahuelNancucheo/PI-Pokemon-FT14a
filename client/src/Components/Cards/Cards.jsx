@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-//import card adn styles
+import './styles.css';
 import Card from '../Card/Card';
 
 function Cards({show}) {
 
     return (
-        <div>
+        <div className='page'>
+            <ul className='list'>
             {show && show.map((p => (
                 <li key={p.id}>
                     <Card
@@ -16,6 +16,7 @@ function Cards({show}) {
                     />
                 </li>
             )))}
+            </ul>
         </div>
     )
 };

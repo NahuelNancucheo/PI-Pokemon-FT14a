@@ -12,7 +12,7 @@ function Specs(props) {
         return () => {
             dispatch(clearPokemonSpecs());
         }
-    }, []);
+    }, [dispatch]);
 
 
     return (

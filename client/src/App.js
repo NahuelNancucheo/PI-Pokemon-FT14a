@@ -48,7 +48,7 @@ import thunk from redux-thunk
       
       
   
-      
+            <Route exact path='/home/pokemon/search' component={Search} />
       
 
 */

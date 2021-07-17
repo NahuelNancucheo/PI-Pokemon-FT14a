@@ -18,9 +18,6 @@ function Nav() {
                     <Link to='/home/pokemon/create' className='link' onClick={() => toggle()}>Crear Pokemon</Link>
                     </li>
                     <li>
-                        <Link to='/home/pokemon/search' className='link' onClick={() => toggle()}>Buscar Pokemon</Link>
-                    </li>
-                    <li>
                         <Link to='/' className='link' onClick={() => toggle()}>Landing Page</Link>
                     </li>
                 </ul>
@@ -30,3 +27,7 @@ function Nav() {
 };
 
 export default Nav;
+
+/*
+
+ */

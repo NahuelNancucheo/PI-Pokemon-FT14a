@@ -1,0 +1,28 @@
+.page {
+    text-align: center;
+}
+.list {
+    border: 1.5px solid #434141;
+    border-radius: 10px;
+    width: 90%;
+    margin: 20px auto;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+/*
+RED: #D54F4C
+YELLOW: #F4CC5F
+BLUE: #79B1C8
+GRAY: #434141
+rgba(128, 128, 128, 0.76)
+
+crema: #f9faf4
+gris: #4a6163
+naranjita: #f9a66c
+amarillito: ffc94b
+rojito: #f17a7e
+*/

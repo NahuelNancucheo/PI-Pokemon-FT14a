@@ -42,7 +42,7 @@ export default function CreatePokemon() {
 
     useEffect(() => {
         dispatch(getTypes());
-    },[])
+    },[dispatch])
 
     function handleChecked(e) {
         if(e.target.checked) {

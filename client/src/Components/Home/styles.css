@@ -1,0 +1,24 @@
+.home {
+    padding: 50px;
+	background:#ffc94bd2
+	;
+	
+	min-height: 100vh;
+}
+/*
+RED: #D54F4C
+YELLOW: #F4CC5F
+BLUE: #79B1C8
+GRAY: #434141
+background: linear-gradient(
+		0deg,
+		rgba(0, 0, 0, 1) 0%,
+		rgba(251,215,67, 1) 71%
+	);
+	/*#f3ca698f
+crema: #f9faf4
+gris: #4a6163
+naranjita: #f9a66c
+amarillito: #ffc94b
+rojito: #f17a7e
+*/

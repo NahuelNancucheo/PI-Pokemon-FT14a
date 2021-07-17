@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {clearPokemonSearch, getPokemonName} from '../../actions/index';
+import {useHistory} from 'react-router-dom';
 import Caracs from '../Specs/Caracs';
 //import styles
 
 function Search() {
+    let history = useHistory();
     const [name, setName] = useState('');
 
     const dispatch = useDispatch();
@@ -17,28 +19,18 @@ function Search() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        /*
-        const pokmnSearch = pokemonsShowed.find(p=>p.name === name.toLowerCase())
-        if(pokmnSearch) {
-            window.location.replace(`/home/pokemons/${pokmnSearch.id}`)
-            setName('')
-        } else {
-            dispatch(getPokemonName(name.toLowerCase()))
-            setName('')
-        }
-        */
-        
         if(name.length) {
             dispatch(getPokemonName(name.toLowerCase()));
             setName('');
         }
+        history.push('/home/pokemon/search')
     }
 
     useEffect(() => {
         return () => {
             dispatch(clearPokemonSearch());
         }
-    }, []);
+    }, [dispatch]);
 
     return (
     <div className='home'>
@@ -53,17 +45,17 @@ function Search() {
                 />
                 <input className='input-btn' type='submit' value='Buscar' />
             </form>
-            <div>
-            {pokemonSearch.message ? (
-                <h2 className='notFound'>Loading...(aca iria un gif con wait a search)/ {pokemonSearch.message}</h2> 
+        </div>
+        <div>
+            {pokemonSearch.name ? (
+                 <Caracs pokemon={pokemonSearch} />
+                
             ) : (
-                <Caracs pokemon={pokemonSearch} />
+                <h2 className='notFound'>Loading...(aca iria un gif con wait a search)y catchear el error {pokemonSearch.error}</h2> 
             )}
-            </div>
         </div>
     </div>
     );  
 };
 
 export default Search;
-//{pokemonSearch.error}

@@ -10,7 +10,7 @@ function Caracs(props) {
                 <p>{error}</p>
             ) : (
                 <div className='specs'>
-                    {img ? (<img src={`${img}`} alt={`${name} image`}/>) : (<img src='https://quizizz.com/media/resource/gs/quizizz-media/quizzes/64b606bc-b417-40fd-aabc-f86810fe4399?w=200&h=200' alt='not found'/>)}
+                    {img ? (<img src={`${img}`} alt={`${name} imagePkmn`}/>) : (<img src='https://quizizz.com/media/resource/gs/quizizz-media/quizzes/64b606bc-b417-40fd-aabc-f86810fe4399?w=200&h=200' alt='not found'/>)}
                     <div className='stats'>
                     <h2>{name}</h2>
                     <p>

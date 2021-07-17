@@ -1,0 +1,56 @@
+.card {
+    border: 1px solid #434141;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 250px;
+    height: 300px;
+    background-color: #4a6163e0;
+    margin: 20px 10px;
+}
+.card img {
+    max-width: 150px;
+    max-height: 150px;
+    margin: 10px 15px;
+}
+.name {
+    text-transform: capitalize;
+    font-family: Lato, sans-serif;
+    font-weight: bold;
+    line-height: 0px;
+    margin: 0;
+}
+.types p {
+    text-transform:capitalize;
+    font-family: Lato, sans-serif;
+    margin: 10px 20px ;
+    color: black;
+    background-color: #ccc;
+    border-radius: 5px;
+}
+.types span {
+    flex-wrap: wrap;
+    text-transform:capitalize;
+    font-family: Lato, sans-serif;
+    border:black;
+    border-radius: 2px;
+    background-color: #ccc;
+    margin: auto 10px;
+}
+.btn-more {
+    margin: 15px;
+    padding: 8px 10px;
+    background-color: #f9a66c;
+    border: none;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    cursor: hand;
+}
+  
+.btn-more:hover {
+    margin: 15px;
+    padding: 9px 11px;
+    background-color: #f87d25;
+    border: none;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+}
