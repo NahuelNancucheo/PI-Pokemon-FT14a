@@ -43,7 +43,7 @@
     border: none;
     border-radius: 5px;
     color: rgb(0, 0, 0);
-    cursor: hand;
+    cursor: pointer;
 }
   
 .btn-more:hover {

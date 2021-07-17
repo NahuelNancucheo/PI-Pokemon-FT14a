@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {addPokemon, getTypes} from '../../actions/index';
-//import styles
+import './styles.css';
 
 export function validate(input) {
     let errors = {};
@@ -190,7 +190,7 @@ export default function CreatePokemon() {
                         {error.img && <span>{error.img}</span>}
                     </div>
 
-                    <h2>Tipos</h2>
+                    <h3>Elija uno o mas tipos</h3>
                     <div className='input-types'>
                         {typesDB && typesDB.map(t => (
                             <div key={`${t.id}`} className='type'>

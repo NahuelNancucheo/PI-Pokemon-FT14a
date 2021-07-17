@@ -1,5 +1,5 @@
 import React from 'react'
-//import styles
+import './styles.css';
 
 function Caracs(props) {
     const {error, img, name, types, hp, attack, defense, speed, height, weight, id} = props.pokemon;
@@ -41,7 +41,6 @@ function Caracs(props) {
                         <span>ID: </span>
                         {id}
                     </p>
-                    <h2>{types && types.map(t => t.name)}</h2>
                     </div>
                 </div>
             )}
