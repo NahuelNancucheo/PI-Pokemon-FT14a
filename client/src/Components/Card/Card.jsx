@@ -10,11 +10,11 @@ function Card({name, img, id, types}) {
             {img ? (<img src={`${img}`} alt={`${name} imagePkmn`}/>) : (<img src='https://quizizz.com/media/resource/gs/quizizz-media/quizzes/64b606bc-b417-40fd-aabc-f86810fe4399?w=200&h=200' alt='not found'/>)}
             <p className='name'>{name}</p>
             <div className='types'>
-                <p>Tipos</p>
+                <p>Type</p>
                 {types && types.map(t => <span key={t.name}>{t.name}</span>)}
             </div>
             <Link to={`/home/pokemons/${id}`}>
-                <button className='btn-more'>Mas detalles</button>
+                <button className='btn-more'>More details</button>
             </Link>
         </div>
     )

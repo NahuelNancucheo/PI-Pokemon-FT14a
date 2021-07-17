@@ -14,32 +14,32 @@ function Caracs(props) {
                     <div className='stats'>
                     <h2>{name}</h2>
                     <p>
-                        <span>Vida: </span>
+                        <span>ID: </span>
+                        {id}
+                    </p>
+                    <p>
+                        <span>Health: </span>
                         {hp}
                     </p>
                     <p>
-                        <span>Ataque: </span>
+                        <span>Attack: </span>
                         {attack}
                     </p>
                     <p>
-                        <span>Defensa: </span>
+                        <span>Defense: </span>
                         {defense}
                     </p>
                     <p>
-                        <span>Velocidad: </span>
+                        <span>Speed: </span>
                         {speed}
                     </p>
                     <p>
-                        <span>Altura: </span>
+                        <span>Height: </span>
                         {height}
                     </p>
                     <p>
-                        <span>Peso: </span>
+                        <span>Weight: </span>
                         {weight}
-                    </p>
-                    <p>
-                        <span>ID: </span>
-                        {id}
                     </p>
                     </div>
                 </div>

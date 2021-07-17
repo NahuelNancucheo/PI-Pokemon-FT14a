@@ -8,6 +8,7 @@ import Caracs from '../Specs/Caracs';
 function Search() {
     let history = useHistory();
     const [name, setName] = useState('');
+    const [loading, setLoading] = useState(false)
 
     const dispatch = useDispatch();
     const pokemonSearch = useSelector(store => store.pokemonSearch);//buscarlo en la api o en los 40 que traigo?
@@ -20,10 +21,14 @@ function Search() {
     function handleSubmit(e) {
         e.preventDefault();
         if(name.length) {
+            setLoading(true)
             dispatch(getPokemonName(name.toLowerCase()));
             setName('');
+            history.push('/home/pokemon/search');
+            //setLoading(false)
+        } else {
+            alert('Please type a name')
         }
-        history.push('/home/pokemon/search')
     }
 
     useEffect(() => {
@@ -33,27 +38,26 @@ function Search() {
     }, [dispatch]);
 
     return (
-    <div className='home'>
+    <div className='search'>
         <div className='search-bar'>
             <form onSubmit={e => handleSubmit(e)}>
                 <input 
                     className='input-text'
                     type='text'
-                    placeholder='Busca un pokemon'
+                    placeholder='Search a pokemon'
                     value={name}
                     onChange={e => handleChange(e)}
                 />
-                <input className='input-btn' type='submit' value='Buscar' />
+                <input className='input-btn' type='submit' value='Search' />
             </form>
         </div>
-        <div>
-            {pokemonSearch.name ? (
+            {pokemonSearch.id ? (
                  <Caracs pokemon={pokemonSearch} />
                 
-            ) : (
-                <h2 className='notFound'>Loading...(aca iria un gif con wait a search)y catchear el error {pokemonSearch.error}</h2> 
-            )}
-        </div>
+            ) : 
+                pokemonSearch.message ? (<div><h2 className='notfound'>404 Not found: That Pokemon doesnt exists, yet</h2><img  width='900px' src='https://as01.epimg.net/epik/imagenes/2018/11/16/portada/1542384053_864693_1542384302_noticia_normal.jpg' alt='error'/></div> ) : !loading ? null : (<span>loading...</span>)  
+                
+            }
     </div>
     );  
 };

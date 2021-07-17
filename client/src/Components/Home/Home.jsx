@@ -36,7 +36,7 @@ function Home() {
         <div className='home'>
             <Search/>
             <Filters />
-            {pokemonsShowed[0] ? (<Cards className='card' show={currentPokmn} />) : (<h2>Loading...</h2>)}
+            {pokemonsShowed[0] ? (<Cards className='card' show={currentPokmn} />) : (<span>Loading...</span>)}
             <Pagination pokmnPerPage={pokmnPerPage} totalPokmn={pokemonsShowed.length} paginate={paginate}/>
         </div>
     );

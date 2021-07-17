@@ -37,27 +37,27 @@ function Filter() {
     return (
         <div className='filters'>
             <div className='sort'>
-                <label htmlFor='order'>Ordenar por</label>
+                <label htmlFor='order'>Order by</label>
                 <select name='order' onChange={handleChangeOrder} >
                     <option value='none' >None</option>
-                    <option value='high-low'>Mas fuerte</option>
-                    <option value='low-high'>Mas debil</option>
+                    <option value='high-low'>More strong</option>
+                    <option value='low-high'>More weak</option>
                     <option value='A-Z'>A-Z</option>
                     <option value='Z-A'>Z-A</option>
                 </select>
             </div>
             <div className='origin'>
-                <label htmlFor='filter'>Filtrar por Origen</label>
+                <label htmlFor='filter'>Filter by origin</label>
                 <select name='filter' onChange={handleChangeFilter} >
                     <option value='all'>All</option>
-                    <option value='created'>Pokemons by Users</option>
-                    <option value='exists'>Pokemons by Api</option>
+                    <option value='created'>Created by users</option>
+                    <option value='exists'>Pokemons Api</option>
                 </select>
             </div>
             <div className='types'>
-                <label htmlFor='types'>Filtrar por tipos</label>
+                <label htmlFor='types'>Filter by type</label>
                 <select name='Types' onChange={handleChangeTypes} >
-                    <option value='all'>Todos</option>
+                    <option value='all'>All types</option>
                     {types && types.map(t => (
                         <option key={`${t.name}`} value={`${t.name}`}>{`${t.name}`}</option>
                     ))}

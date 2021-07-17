@@ -15,9 +15,13 @@ export function validate(input) {
         } else {
             if(!input[key] && key !== 'img') {
                 errors[key] = 'name is required'
-            } /*else if(/\d/.test(input[key])) { //ver como hacer para que me valide el link
+            } else if(/\d/.test(input[key] && key !== 'img')) { 
                 errors[key] = 'only letters';
-            }*/
+            } else if (input['img']) {
+                if(!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/i.test(input['img'])) {
+                    errors[key] = 'only links .jpg .jpeg .png or .gif'
+                }   
+            }
         }
     }
     return errors;
@@ -95,7 +99,7 @@ export default function CreatePokemon() {
             <div className='form'>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className='stat'>
-                        <label>Nombre: </label>
+                        <label>Name: </label>
                         <input
                             name='name'
                             type='text'
@@ -107,7 +111,7 @@ export default function CreatePokemon() {
                     </div>
 
                     <div className='stat'>
-                        <label>Vida: </label>
+                        <label>Health: </label>
                         <input
                             name='hp'
                             type='text'
@@ -119,7 +123,7 @@ export default function CreatePokemon() {
                     </div >
 
                     <div className='stat'>
-                        <label>Ataque: </label>
+                        <label>Attack: </label>
                         <input
                             name='attack'
                             type='text'
@@ -131,7 +135,7 @@ export default function CreatePokemon() {
                     </div>
 
                     <div className='stat'>
-                        <label>Defensa: </label>
+                        <label>Defense: </label>
                         <input
                             name='defense'
                             type='text'
@@ -143,7 +147,7 @@ export default function CreatePokemon() {
                     </div >
 
                     <div className='stat'>
-                        <label>Velocidad: </label>
+                        <label>Speed: </label>
                         <input
                             name='speed'
                             type='text'
@@ -155,7 +159,7 @@ export default function CreatePokemon() {
                     </div>
 
                     <div className='stat'>
-                        <label>Altura: </label>
+                        <label>Height: </label>
                         <input
                             name='height'
                             type='text'
@@ -167,7 +171,7 @@ export default function CreatePokemon() {
                     </div>
 
                     <div className='stat'>
-                        <label>Peso: </label>
+                        <label>Weight: </label>
                         <input
                             name='weight'
                             type='text'
@@ -190,7 +194,7 @@ export default function CreatePokemon() {
                         {error.img && <span>{error.img}</span>}
                     </div>
 
-                    <h3>Elija uno o mas tipos</h3>
+                    <h3>Choose one or more:</h3>
                     <div className='input-types'>
                         {typesDB && typesDB.map(t => (
                             <div key={`${t.id}`} className='type'>

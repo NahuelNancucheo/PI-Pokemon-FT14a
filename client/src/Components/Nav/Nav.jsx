@@ -15,7 +15,7 @@ function Nav() {
             <div className='navigation'>
                 <ul>
                     <li>
-                    <Link to='/home/pokemon/create' className='link' onClick={() => toggle()}>Crear Pokemon</Link>
+                    <Link to='/home/pokemon/create' className='link' onClick={() => toggle()}>Create a Pokemon</Link>
                     </li>
                     <li>
                         <Link to='/' className='link' onClick={() => toggle()}>Landing Page</Link>

@@ -14,18 +14,6 @@ import {
 //const {REACT_APP_BACKEND_URL} = process.env;
 const BACKEND = 'http://localhost:3001'
 
-/*
-addPokemon
-getTypes
-getPokemons
-getPokemonName
-getPokemonById
-filterPokemonsByType
-filterPokemonByOrigin
-sortPokemons
-clearPokemonSpecs
-clearPokemonsSearch
-*/
 export function addPokemon(specs) {
     return (dispatch) => {
         axios.post(`${BACKEND}/pokemons`, specs)
@@ -51,8 +39,13 @@ export function getPokemons() {
 
 export function getPokemonName(name) {
     return async (dispatch) => {
-        const r = await axios.get(`${BACKEND}/pokemons?name=${name}`);
-        dispatch({ type: GET_POKEMON_NAME, payload: r.data });
+        try {
+            const r = await axios.get(`${BACKEND}/pokemons?name=${name}`);
+            dispatch({ type: GET_POKEMON_NAME, payload: r.data });
+        } catch(err) {
+            dispatch({ type: GET_POKEMON_NAME, payload: err});
+            //throw Error(err)
+        }  
     }
 };
 
@@ -77,26 +70,7 @@ export function filterPokemonsByOrigin(type) {
         payload: type
     }
 };
-/*
-export function filterByApi() {
-    return (dispatch) => {
-        axios.get(`${BACKEND}/pokemons?filter=byApi`)
-        .then(r => {
-            dispatch({type: FILTER_BY_ORIGIN_API, payload: r.data})
-        })
-    }
-};
 
-
-export function filterByUsers() {
-    return (dispatch) => {
-        axios.get(`${BACKEND}/pokemons?filter=byUsers`)
-        .then(r => {
-            dispatch({type: FILTER_ORIGIN_POKEMON, payload: r.data})
-        })
-    }
-};
-*/
 export function sortPokemons(type) {
     return {
         type: SORT_POKEMONS,
