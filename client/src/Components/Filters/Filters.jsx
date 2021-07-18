@@ -16,7 +16,7 @@ function Filter() {
     const types = useSelector(store => store.types);
     const dispatch = useDispatch();
 
-    const handleChangeFilter = (e) => {
+    const handleChangeFilter = (e) => { //by origin
         setFilter(e.target.value);
     };
 

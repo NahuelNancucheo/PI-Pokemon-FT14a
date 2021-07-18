@@ -16,6 +16,7 @@ function Home() {
     const pokemonsShowed = useSelector(store => store.pokemonsShowed);//aca tengo que usar los estados del store ya que los cargue en la alnding page
     //const pokemonSearch = useSelector(store => store.pokemonSearch)
 
+    
     useEffect(() => {
         dispatch(getPokemons()); 
         dispatch(getTypes());

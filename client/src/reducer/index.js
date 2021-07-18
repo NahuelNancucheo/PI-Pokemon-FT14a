@@ -11,11 +11,11 @@ import {
     CLEAR_POKEMON_SPECS
 } from '../constants';
 
-function filterby(arr, field) {
+function filterby(arr, actionPayload) {
     let pokemonsF = [];
     for(let i = 0; i < arr.length; i++) {
         for(let j= 0; j < arr[i].types.length; j++) {
-            if(arr[i].types[j].name === field) {
+            if(arr[i].types[j].name === actionPayload) {
                 pokemonsF.push(arr[i])
             }
         }
@@ -75,19 +75,6 @@ export default function rootReducer(state = initialData, action) {
                     pokemonsShowed: filteredPokemons
                 }
             }
-            
-            /*
-            if(action.payload === 'all') {
-                return {...state, pokemonsShowed: state.pokemonsFiltered}
-            } else {
-                return {
-                    ...state, 
-                    pokemonsShowed: state.pokemonsFiltered.filter(el => 
-                        el.types.includes(action.payload)//probar con algun type hardcodeado
-                    )
-                };
-            }
-            */
             
         case SORT_POKEMONS:
             if(action.payload === 'low-high') {
