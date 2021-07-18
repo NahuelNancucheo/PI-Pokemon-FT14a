@@ -34,12 +34,15 @@ function Home() {
     }
 
     return(
-        <div className='home'>
-            <Search/>
-            <Filters />
-            {pokemonsShowed[0] ? (<Cards className='card' show={currentPokmn} />) : (<span>Loading...</span>)}
-            <Pagination pokmnPerPage={pokmnPerPage} totalPokmn={pokemonsShowed.length} paginate={paginate}/>
-        </div>
+        <>
+            <Search className='search'/>
+            <div className='home'>
+                <Filters />
+                {pokemonsShowed[0] ? (<Cards className='card' show={currentPokmn} />) : (<span>Loading...</span>)}
+                <Pagination pokmnPerPage={pokmnPerPage} totalPokmn={pokemonsShowed.length} paginate={paginate}/>
+            </div>
+        </>
+        
     );
 };
 

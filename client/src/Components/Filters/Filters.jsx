@@ -6,6 +6,7 @@ import {
     filterPokemonsByOrigin,
     filterPokemonsByType,
 } from '../../actions/index';
+import './styles.css';
 
 function Filter() {
     const [order, setOrder] = useState('');

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {getPokemonById, clearPokemonSpecs} from '../../actions/index';
 import Caracs from "./Caracs";
+import './styles.css'
 
 function Specs(props) {
     const dispatch = useDispatch();

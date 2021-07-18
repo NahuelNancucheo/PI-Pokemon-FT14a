@@ -1,0 +1,37 @@
+.search-bar {
+    text-align: center;
+    padding: 10px;
+}
+.search {
+	padding-top: 15px;
+	padding-bottom: 5px;
+	background:#ffc94bd2;
+}
+.input-text {
+    padding: 10px;
+    border-radius: 5px 0 0 5px;
+	border: 1px solid #434141;
+    border-right: none;
+    background-color:  white;
+    font-size: medium;
+}
+
+.input-btn {
+	padding: 10px;
+	border-radius: 0 5px 5px 0;
+	border: 1px solid #434141;
+	border-left: none;
+	background-color: #4a6163e0;
+	font-size: medium;
+}
+.input-btn:hover {
+    cursor: pointer;
+	border-left: none;
+	background-color: #639397e0;
+	font-size: medium;
+	color: #eee;
+}
+.not-found {
+    text-align: center;
+    background: #ffc94bd2;
+}

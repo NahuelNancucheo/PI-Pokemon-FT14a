@@ -2,10 +2,10 @@ import React from 'react'
 import './styles.css';
 
 function Caracs(props) {
-    const {error, img, name, types, hp, attack, defense, speed, height, weight, id} = props.pokemon;
+    const {error, img, name, hp, attack, defense, speed, height, weight, id} = props.pokemon;
 
     return (
-        <div className='home' >
+        <div >
             {error ? (
                 <p>{error}</p>
             ) : (
