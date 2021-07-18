@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles.css'
 
 function Pagination({ pokmnPerPage, totalPokmn, paginate }) {
     const pageNumbers = [];  
@@ -8,17 +9,15 @@ function Pagination({ pokmnPerPage, totalPokmn, paginate }) {
     }
 
     return (
-        <div>
-            <div className='pagination' >
-                {pageNumbers && pageNumbers.map(number => (
-                    <div key={number} className='page-item'>
-                        <button onClick={() => paginate(number)} className='page-link' >
-                        {number}
-                        </button>
-                    </div>
-                ))}
-            </div>
-        </div>
+        <>
+            {pageNumbers && pageNumbers.map(number => (
+                <div key={number} className='page-item'>
+                     <a onClick={() => paginate(number)} className='page-link' >
+                    {number}
+                    </a>
+                </div>
+            ))}
+        </>
     )
 };
 
