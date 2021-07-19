@@ -12,13 +12,13 @@ function Nav() {
                 </NavLink>
                 <Bars/>
                 <NavMenu>
-                    <NavLink to='/home/pokemon/create' activeStyle>
+                    <NavLink to='/home/pokemon/create'>
                         Create a Pokemon
                     </NavLink>
-                    <NavLink to='/landing' activeStyle>
+                    <NavLink to='/landing'>
                         Landing page
                     </NavLink>
-                    <NavLink to='/about' activeStyle>
+                    <NavLink to='/about'>
                         About me
                     </NavLink>
                 </NavMenu>

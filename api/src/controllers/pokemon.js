@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const { Pokemon, Type } = require('../db');
 const { API_HOME } = require('../constants');
 
+//obtengo de la api, doble request
 async function getApi() {
     try {
         const pokemonsList = await axios.get(`${API_HOME}?limit=40`)
@@ -30,8 +31,9 @@ async function getApi() {
 
 };
 
+//traigo todos y y si hay name, busco por name
 async function getAllPokemons(req, res, next) {
-    const {name} = req.query;
+    const { name } = req.query;
 
     if(name) {
         //busco api
@@ -73,9 +75,8 @@ async function getAllPokemons(req, res, next) {
         })
     };
 
-    //busco en api
+    //Armo la lista de pokemons que voy a mostrar en home
     const pokeApi = await getApi();
-    //busco en db
     let pokeMine = await Pokemon.findAll({ include: [
         { model: Type, attributes: ["name"], through: { attributes: [] } }
         ]
@@ -169,10 +170,13 @@ module.exports = {
     getPokemonByID,
     createPokemon
 }
+
+
+
     /*
-    nameExist = await Pokemon.findOne({where:{name:name}}) ---> de esta manera
+    nameExist = await Pokemon.findOne({where:{name:name}}) 
     if(nameExist) {
-        return res.status(404).send('el pokemon ya existe') -> ver que hacer segun lo que dice el readme y wanda
+        return res.status(404).send('el pokemon ya existe') 
     }
     
     */

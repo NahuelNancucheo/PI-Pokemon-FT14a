@@ -11,6 +11,7 @@ import {
     CLEAR_POKEMON_SPECS
 } from '../constants';
 
+//[{name:,id:,hp:,...,types:["fire", "water"]}, {...},{...}]
 function filterby(arr, actionPayload) {
     let pokemonsF = [];
     for(let i = 0; i < arr.length; i++) {
@@ -25,7 +26,7 @@ function filterby(arr, actionPayload) {
 
 const initialData = {
     pokemonsLoaded: [], //api
-    pokemonsShowed: [], //todos
+    pokemonsShowed: [], //todos los que muestro
     pokemonsFiltered: [], //by api or users
     myPokemons: [], //db
     pokemonSpecs: {},

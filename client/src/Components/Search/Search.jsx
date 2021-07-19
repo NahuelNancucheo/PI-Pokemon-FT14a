@@ -12,8 +12,7 @@ function Search() {
     const [loading, setLoading] = useState(false)
 
     const dispatch = useDispatch();
-    const pokemonSearch = useSelector(store => store.pokemonSearch);//buscarlo en la api o en los 40 que traigo?
-    //const pokemonsShowed = useSelector(store => store.pokemonsShowed)
+    const pokemonSearch = useSelector(store => store.pokemonSearch);
 
     function handleChange(e) {
         setName(e.target.value);
