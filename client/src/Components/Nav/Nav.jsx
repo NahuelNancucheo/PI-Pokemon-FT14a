@@ -19,7 +19,7 @@ function Nav() {
                         Landing page
                     </NavLink>
                     <NavLink to='/about' activeStyle>
-                        About
+                        About me
                     </NavLink>
                 </NavMenu>
             </NavBar>

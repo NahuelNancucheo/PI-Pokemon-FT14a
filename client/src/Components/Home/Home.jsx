@@ -13,9 +13,7 @@ function Home() {
     const [pokmnPerPage] = useState(12);
 
     const dispatch = useDispatch();
-    const pokemonsShowed = useSelector(store => store.pokemonsShowed);//aca tengo que usar los estados del store ya que los cargue en la alnding page
-    const pokemonCreated = useSelector(store => store.myPokemons)
-
+    const pokemonsShowed = useSelector(store => store.pokemonsShowed);
     
     useEffect(() => {
         dispatch(getPokemons()); 
@@ -31,7 +29,7 @@ function Home() {
     const paginate = (pageNumber) =>{ 
         setCurrentPage(pageNumber);
         window.scrollTo(0, 0);
-    }
+    } 
 
     return(
         <>

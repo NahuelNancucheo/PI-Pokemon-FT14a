@@ -73,7 +73,7 @@ export default function rootReducer(state = initialData, action) {
                 return {
                     ...state,
                     pokemonsShowed: filteredPokemons
-                }
+                } 
             }
             
         case SORT_POKEMONS:

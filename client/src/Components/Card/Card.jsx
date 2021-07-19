@@ -2,13 +2,14 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 //import { v4 as uuidv4, v4 } from 'uuid';
 import './styles.css';
+import Pokebola from '../../assets/pokebola.png'
 
 function Card({name, img, id, types}) {
 
 
     return (
         <div className='card'>
-            {img ? (<img src={`${img}`} alt={`${name} imagePkmn`}/>) : (<img src='https://quizizz.com/media/resource/gs/quizizz-media/quizzes/64b606bc-b417-40fd-aabc-f86810fe4399?w=200&h=200' alt='not found'/>)}
+            {img ? (<img src={`${img}`} alt={`${name} imagePkmn`}/>) : (<img src={Pokebola} alt='not found'/>)}
             <p className='name'>{name}</p>
             <div className='types'>
                 <p>Type</p>
