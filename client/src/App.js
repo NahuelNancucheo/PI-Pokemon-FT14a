@@ -14,7 +14,7 @@ dotenv.config();
 function App() {
   return (
     <div className="App">
-      <Route exact path='/' component={LandingPage} />
+      <Route exact path='/landing' component={LandingPage} />
       <Route path='/home' component={Nav} />
       <Route exact path='/home/pokemons' component={Home} />
       <Route exact path='/home/pokemons/:id' component={Specs} />

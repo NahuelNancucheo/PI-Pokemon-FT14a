@@ -17,7 +17,10 @@ function Specs(props) {
 
 
     return (
-        <Caracs pokemon={pokemonSpecs}/>
+        <div className='caracs'>
+             <Caracs pokemon={pokemonSpecs}/>
+        </div>
+       
     )
 };
 

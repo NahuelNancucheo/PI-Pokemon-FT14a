@@ -12,14 +12,12 @@
 }
 .stat > label {
     font-size: medium;
-    font-family:Roboto;
-    text-transform: uppercase;
+    text-transform:capitalize;
     font-weight: bold;
 }
 .stat > input {
     padding: 7px;
     background-color: #eee;
-    font-family: Roboto;
     border: 1px solid #eee;
     border-radius: 5px;
 }
@@ -29,7 +27,6 @@
 }
 .form h3 {
     text-align: center;
-    font-family: Roboto;
     text-transform: capitalize;
 }
 .type {

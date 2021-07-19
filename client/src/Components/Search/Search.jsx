@@ -55,7 +55,7 @@ function Search() {
                  <Caracs pokemon={pokemonSearch} />
                 
             ) : 
-                pokemonSearch.message ? (<div className='not-found'><h2 className='notfound'>404 Not found: That Pokemon doesnt exists, yet</h2><img  width='900px' src='https://as01.epimg.net/epik/imagenes/2018/11/16/portada/1542384053_864693_1542384302_noticia_normal.jpg' alt='error'/></div> ) : !loading ? null : (<span>loading...</span>)  
+                pokemonSearch.message ? (<div className='not-found'><h2 className='notfound'>404 Not found: That Pokemon does not exists, yet</h2><img  width='900px' src='https://as01.epimg.net/epik/imagenes/2018/11/16/portada/1542384053_864693_1542384302_noticia_normal.jpg' alt='error'/></div> ) : !loading ? null : (<span>loading...</span>)  
                 
             }
     </div>

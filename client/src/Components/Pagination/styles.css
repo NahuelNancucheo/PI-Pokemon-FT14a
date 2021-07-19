@@ -10,13 +10,12 @@
     cursor: pointer;
     border-radius: 5px;
     transition: background-color .3s;
-    border: 1px solid #ddd;
+    border: 1px solid #D54F4C;
     margin: 0 4px;
     font-size: 18px;
 }
 .page-item a.active {
-    background-color: #4CAF50;
-    color: white;
+    color: #D54F4C;
     border-radius: 5px;
 }
-.page-item a:hover:not(.active) {background-color: #ddd;}
+.page-item a:hover:not(.active) {background-color: #D54F4C;}

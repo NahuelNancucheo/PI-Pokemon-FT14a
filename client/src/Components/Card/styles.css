@@ -1,11 +1,27 @@
 .card {
     border: 1px solid #434141;
-    border-radius: 8px;
+    border-radius: 2px;
     text-align: center;
     min-width: 250px;
     height: 300px;
     background-color: #4a6163e0;
     margin: 20px 10px;
+    box-shadow: 3px 11px 26px 2px rgba(0,0,0,0.57);
+    -webkit-box-shadow: 3px 11px 26px 2px rgba(0,0,0,0.57);
+    -moz-box-shadow: 3px 11px 26px 2px rgba(0,0,0,0.57);    
+
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+}
+.card:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 .card img {
     max-width: 150px;
@@ -14,14 +30,12 @@
 }
 .name {
     text-transform: capitalize;
-    font-family: Lato, sans-serif;
     font-weight: bold;
     line-height: 0px;
     margin: 0;
 }
 .types p {
     text-transform:capitalize;
-    font-family: Lato, sans-serif;
     margin: 10px 20px ;
     color: black;
     background-color: #ccc;
@@ -30,7 +44,6 @@
 .types span {
     flex-wrap: wrap;
     text-transform:capitalize;
-    font-family: Lato, sans-serif;
     border:black;
     border-radius: 2px;
     background-color: #ccc;

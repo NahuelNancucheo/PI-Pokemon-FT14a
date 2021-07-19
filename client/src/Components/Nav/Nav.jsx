@@ -1,34 +1,30 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { NavBar, NavLink, Bars, NavMenu } from './styled';
 
 
 function Nav() {
-    const [show, setShow] = useState(false);
-    const toggle = () => {
-        setShow(!show);
-    }
 
     return (
-        <nav>
-            <div>
-                <Link to='/home/pokemons' className='logo'>PokemonApp</Link>
-            </div>
-            <div className='navigation'>
-                <ul>
-                    <li>
-                    <Link to='/home/pokemon/create' className='link' onClick={() => toggle()}>Create a Pokemon</Link>
-                    </li>
-                    <li>
-                        <Link to='/' className='link' onClick={() => toggle()}>Landing Page</Link>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <>
+            <NavBar>
+                <NavLink to='/home/pokemons'>
+                   <h3>Pokemon App</h3> 
+                </NavLink>
+                <Bars/>
+                <NavMenu>
+                    <NavLink to='/home/pokemon/create' activeStyle>
+                        Create a Pokemon
+                    </NavLink>
+                    <NavLink to='/landing' activeStyle>
+                        Landing page
+                    </NavLink>
+                    <NavLink to='/about' activeStyle>
+                        About
+                    </NavLink>
+                </NavMenu>
+            </NavBar>
+        </>
     );
 };
 
 export default Nav;
-
-/*
-
- */

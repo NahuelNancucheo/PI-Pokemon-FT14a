@@ -36,7 +36,7 @@ const LandingStyle = styled.div`
 				font-weight: 600;
 				line-height: 1.0em;
             }
-            p{
+            p {
                 color: #434141;
 				font-size: 1.1em;
 				margin: 20px 0 10px;
@@ -67,7 +67,7 @@ const LandingStyle = styled.div`
                 }
                 .bg {
                     position: absolute;
-                    top: 0;
+                    top: -60px;
                     right: 0;
                     width: 100%;
                     height: 100%;
