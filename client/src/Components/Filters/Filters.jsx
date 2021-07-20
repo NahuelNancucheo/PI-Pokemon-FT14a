@@ -13,7 +13,7 @@ function Filter() {
     const [filterTypes, setFilterTypes] = useState('all');
     const [filter, setFilter] = useState('all');
 
-
+    const myPokemons = useSelector(store => store.myPokemons);
     const types = useSelector(store => store.types);
     const dispatch = useDispatch();
 
@@ -51,7 +51,7 @@ function Filter() {
                 <label htmlFor='filter'>Filter by origin</label>
                 <select name='filter' onChange={handleChangeFilter} >
                     <option value='all'>All</option>
-                    <option value='created'>Created by users</option>
+                    {myPokemons.length ? (<option value='created'>Created by users</option>) : null}
                     <option value='exists'>Pokemons Api</option>
                 </select>
             </div>
