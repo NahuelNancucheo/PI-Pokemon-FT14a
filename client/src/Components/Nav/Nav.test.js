@@ -1,4 +1,4 @@
-/*
+
 import { NavLink } from 'react-router-dom';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -28,4 +28,3 @@ describe('<Nav />', () => {
         expect(wrapper.find(NavLink).at(2).text()).toEqual('Landing page');
     })
 })
-*/
