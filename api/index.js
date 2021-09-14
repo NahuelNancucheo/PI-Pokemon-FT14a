@@ -25,7 +25,7 @@ const { API_TYPES } = require('../api/src/constants');
 const { Type } = require('../api/src/db');
 
 // Syncing all the models at once.
-conn.sync({ force: false}).then(() => {
+conn.sync({ force: false }).then(() => {
   console.log("correcta conexion con la base de datos")
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
@@ -33,6 +33,7 @@ conn.sync({ force: false}).then(() => {
 });
 
 //pido los types a la api y los guardo en mi db
+/*
 const typesdb = axios
     .get(`${API_TYPES}`)
     .then(response => {
@@ -47,3 +48,4 @@ const typesdb = axios
     .catch(err => console.log(err))
 
 Promise.all([typesdb]).then(() => console.log('types successfully loaded in db'))
+*/

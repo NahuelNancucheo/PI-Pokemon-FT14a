@@ -15,7 +15,7 @@ function Nav() {
                     <NavLink to='/home/pokemon/create'>
                         Create a Pokemon
                     </NavLink>
-                    <NavLink to='/landing'>
+                    <NavLink to='/'>
                         Landing page
                     </NavLink>
                     <NavLink to='/about'>
