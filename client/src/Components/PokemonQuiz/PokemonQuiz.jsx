@@ -16,7 +16,7 @@ export const PokemonQuiz = () => {
     const [lives, setlives] = useState([1,2,3])
     const [gameOver, setgameOver] = useState(false)
 
-    const randoms = [...Array(4)].map(() => Math.floor(Math.random() * 152))
+    const randoms = [...Array(4)].map(() => Math.ceil(Math.random() * 152))
 
     useEffect(() => {
         fetchFunc()
@@ -102,7 +102,7 @@ export const PokemonQuiz = () => {
                     <div className="secondDiv">
                         {showOptions && pokeArrayNames.map((x, index) => {
                             return(
-                                <div className="optionDiv" onClick={() => clickHandler(x[0], index)} ><h3>{x[1].toUpperCase()}</h3></div>
+                                <div className="optionDiv" onClick={() => clickHandler(x[0], index)} key={index} ><h3>{x[1].toUpperCase()}</h3></div>
                             )
                         })}
                     </div>
