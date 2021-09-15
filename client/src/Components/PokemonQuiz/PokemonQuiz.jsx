@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-
+import Pokeball from '../../assets/pokebola.png';
+import Pikachu from '../../assets/pikachu.jpg'
 
 export const PokemonQuiz = () => {
 
@@ -108,13 +109,21 @@ export const PokemonQuiz = () => {
                     </div>
 
                     <div className="thirdDiv">
-                        {showMatch && <div className="match"><h1>Matched</h1></div>}
+                        {showMatch && <div className="match"><h1>Matched!</h1></div>}
                         {showWrong && <div className="wrong"><h1>Wrong! </h1><h4>It's {pokemonOnScreen.toUpperCase()}</h4></div>}
                         {!showOptions && <div className="next" onClick={clickHandler2}><h3>Next Quiz</h3></div>}
                     </div>
 
-                </div>
-                }
+                    <div className="fourthDiv">
+                        <h1>Score: {Score}</h1>
+                        <div style={{display:"flex"}}><h1>{lives.map(x => <img key={x} id={x} className="pokeballImg" src={Pokeball} alt="pokeball img" />)}</h1></div>
+                    </div>
+                </div>}
+                {gameOver && <div className="gameoverScreen">
+                        <h2>Game Over!</h2>
+                        <img width='900px' src={Pikachu} alt="game over" />
+                        <button onClick={refreshGame} >Try Again</button>
+                    </div>}
             </div>
         </div>
     )
