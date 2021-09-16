@@ -1,0 +1,9 @@
+img {
+    width: 400px;
+}
+
+.mainDiv {
+    background-image: url("../../assets/whoisthatpokemonbg.png");
+    background-size: cover;
+    background-position: center center;
+}

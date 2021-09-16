@@ -1,7 +1,8 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import Pokeball from '../../assets/pokebola.png';
-import Pikachu from '../../assets/pikachu.jpg'
+import Pikachu from '../../assets/pikachu.jpg';
+import styles from './PokemonQuiz.module.css';
 
 export const PokemonQuiz = () => {
 
@@ -92,10 +93,10 @@ export const PokemonQuiz = () => {
     }
 
     return (
-        <div className="mainDiv">
+        <div className={styles.mainDiv}>
             <div className="gameScreen">
                 {!gameOver && <div className="game"> 
-                    <div className="imgdiv">
+                    <div className={styles.imgdiv}>
                         {blackImg && <img style={{filter:"contrast(0%) brightness(0%)"}} src={imageSrc} alt="pokeImg" />}
                         {!blackImg && <img src={imageSrc} alt="pokeImg" />}
                     </div>
