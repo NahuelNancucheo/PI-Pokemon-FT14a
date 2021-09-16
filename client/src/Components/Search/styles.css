@@ -1,11 +1,11 @@
 .search-bar {
     text-align: center;
-    padding: 10px;
+	padding-top: 15px;
+	padding-bottom: 25px;
 }
 .search {
 	padding-top: 15px;
 	padding-bottom: 15px;
-	background:#ffc94bd2;
 }
 .input-text {
     padding: 10px;

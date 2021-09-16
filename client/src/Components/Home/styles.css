@@ -3,7 +3,6 @@
 	padding-bottom: 20px;
 	padding-left: 50px;
 	padding-right: 50px;
-	background:#ffc94bd2;
 	min-height: 100vh;
 }
 /*
@@ -16,7 +15,7 @@ background: linear-gradient(
 		rgba(0, 0, 0, 1) 0%,
 		rgba(251,215,67, 1) 71%
 	);
-	/*#f3ca698f
+	/*#f3ca698f #ffc94bd2
 crema: #f9faf4
 gris: #4a6163
 naranjita: #f9a66c

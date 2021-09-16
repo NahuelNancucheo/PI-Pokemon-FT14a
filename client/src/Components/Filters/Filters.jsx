@@ -38,7 +38,7 @@ function Filter() {
     return (
         <div className='filters'>
             <div className='sort'>
-                <label htmlFor='order'>Order by</label>
+                <label htmlFor='order'>Order by: </label>
                 <select name='order' onChange={handleChangeOrder} >
                     <option value='none' >None</option>
                     <option value='high-low'>More strong</option>
@@ -48,7 +48,7 @@ function Filter() {
                 </select>
             </div>
             <div className='origin'>
-                <label htmlFor='filter'>Filter by origin</label>
+                <label htmlFor='filter'>Filter by origin: </label>
                 <select name='filter' onChange={handleChangeFilter} >
                     <option value='all'>All</option>
                     {myPokemons.length ? (<option value='created'>Created by users</option>) : null}
@@ -56,7 +56,7 @@ function Filter() {
                 </select>
             </div>
             <div className='types'>
-                <label htmlFor='types'>Filter by type</label>
+                <label htmlFor='types'>Filter by type: </label>
                 <select name='Types' onChange={handleChangeTypes} >
                     <option value='all'>All types</option>
                     {types && types.map(t => (

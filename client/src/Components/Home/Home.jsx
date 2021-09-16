@@ -33,8 +33,8 @@ function Home() {
 
     return(
         <>
-            <Search className='search'/>
             <div className='home'>
+            <Search className='search'/>
                 <Filters />
                 {pokemonsShowed.length ? (<Cards className='card' show={currentPokmn} />) 
                 : (<div><img src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" alt='loadin-pokemons' height='70' width='70px'/><br/><span>Loading...</span></div>)}

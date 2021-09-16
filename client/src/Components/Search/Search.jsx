@@ -38,7 +38,7 @@ function Search() {
     }, [dispatch]);
 
     return (
-    <div className='search'>
+    <>
         <div className='search-bar'>
             <form onSubmit={e => handleSubmit(e)}>
                 <input 
@@ -60,7 +60,7 @@ function Search() {
                 <img  width='900px' src={Pikachu} alt='error'/></div> )
                  : !loading ? null : (<span>loading...</span>) 
             }
-    </div>
+    </>
     );  
 };
 
