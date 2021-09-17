@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import Pokeball from '../../assets/pokebola.png';
-import Pikachu from '../../assets/pikachu.jpg';
+import Gameover from '../../assets/gameover.png';
 import styles from './PokemonQuiz.module.css';
 
 export const PokemonQuiz = () => {
@@ -97,32 +97,32 @@ export const PokemonQuiz = () => {
             <div className="gameScreen">
                 {!gameOver && <div className="game"> 
                     <div className={styles.imgdiv}>
-                        {blackImg && <img style={{filter:"contrast(0%) brightness(0%)"}} src={imageSrc} alt="pokeImg" />}
+                        {blackImg && <img style={{filter:"contrast(0%) brightness(0%)" }} src={imageSrc} alt="pokeImg" />}
                         {!blackImg && <img src={imageSrc} alt="pokeImg" />}
                     </div>
 
-                    <div className="secondDiv">
+                    <div className={styles.secondDiv}>
                         {showOptions && pokeArrayNames.map((x, index) => {
                             return(
-                                <div className="optionDiv" onClick={() => clickHandler(x[0], index)} key={index} ><h3>{x[1].toUpperCase()}</h3></div>
+                                <div className={styles.optionDiv} onClick={() => clickHandler(x[0], index)} key={index} ><h3>{x[1].toUpperCase()}</h3></div>
                             )
                         })}
                     </div>
 
-                    <div className="thirdDiv">
-                        {showMatch && <div className="match"><h1>Matched!</h1></div>}
-                        {showWrong && <div className="wrong"><h1>Wrong! </h1><h4>It's {pokemonOnScreen.toUpperCase()}</h4></div>}
-                        {!showOptions && <div className="next" onClick={clickHandler2}><h3>Next Quiz</h3></div>}
+                    <div className={styles.thirdDiv}>
+                        {showMatch && <div className={styles.match}><h1>Matched!</h1></div>}
+                        {showWrong && <div className={styles.wrong}><h1>Wrong! </h1><h4>It's {pokemonOnScreen.toUpperCase()}</h4></div>}
+                        {!showOptions && <div className={styles.next} onClick={clickHandler2}><h3>Next Quiz</h3></div>}
                     </div>
 
-                    <div className="fourthDiv">
+                    <div className={styles.fourthDiv}>
                         <h1>Score: {Score}</h1>
-                        <div style={{display:"flex"}}><h1>{lives.map(x => <img key={x} id={x} className="pokeballImg" src={Pokeball} alt="pokeball img" />)}</h1></div>
+                        <div style={{display:"flex"}}><h1>Lives: </h1>{lives.map(x => <img key={x} id={x} className={styles.pokeballImg} src={Pokeball} alt="pokeball img" />)}</div>
                     </div>
                 </div>}
-                {gameOver && <div className="gameoverScreen">
-                        <h2>Game Over!</h2>
-                        <img width='900px' src={Pikachu} alt="game over" />
+                {gameOver && <div className={styles.gameoverScreen}>
+                        <img src={Gameover} alt="game over" />
+                        <h1>Your Score: {Score}</h1>
                         <button onClick={refreshGame} >Try Again</button>
                     </div>}
             </div>

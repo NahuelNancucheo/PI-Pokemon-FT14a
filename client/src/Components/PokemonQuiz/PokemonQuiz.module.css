@@ -1,9 +1,118 @@
-img {
-    width: 400px;
-}
 
 .mainDiv {
-    background-image: url("../../assets/whoisthatpokemonbg.png");
+    background-image: url("../../assets/bgpokegame.jpg");
     background-size: cover;
-    background-position: center center;
+    width: 100vw;
+    height: 100vh;
+}
+.imgdiv {
+    position: absolute;
+    top: 35%;
+    left: 15%;
+}
+.imgdiv img {
+    width:300px;
+    height:300px;
+}
+.secondDiv {
+    position: absolute;
+    top: 28%;
+    right: 10%;
+    height: 250px;
+}
+.optionDiv {
+    margin: 10px 0;
+    width: 250px;
+    height: 40px;
+    text-align: center;
+    border: 5px solid black;
+    color: black;
+    background: yellow;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.optionDiv * {
+    margin-top: 4%;
+}
+
+.match {
+    width: 200px;
+    height: 50px;
+    background-color: green;
+    border-radius: 10px;
+    color: aliceblue;
+}
+.match h1 {
+    margin: 0;
+    text-align: center;
+}
+.wrong {
+    width: 200px;
+    height: 70px;
+    background-color: blueviolet;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    padding: 0;
+}
+.wrong * {
+    margin: 0;
+    padding: 0;
+}
+.next {
+    width: 200px;
+    height: 30px;
+    background-color: yellow;
+    border-radius: 5px;
+    color: blue;
+    text-align: center;
+    margin: 10px 0;
+    cursor: pointer;
+}
+.next h3 {
+    margin: 4px;
+}
+.thirdDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    height: 250px;
+}
+.fourthDiv {
+    position: absolute;
+    bottom: 5%;
+    right: 15%;
+}
+.gameoverScreen img {
+    width: 450px;
+    height: auto;
+    position: absolute;
+    top: 30%;
+    left: 12%;
+}
+.gameoverScreen button {
+    position: absolute;
+    top: 55%;
+    right: 10%;
+    width: 250px;
+    height: 60px;
+    font-size:x-large;
+    background: yellow;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.gameoverScreen h1 {
+    position: absolute;
+    top: 45%;
+    right: 10%;
+    width: 250px;
+    height: 60px;
+    font-size:x-large;
+}
+.pokeballImg {
+    width: 50px;
+    height: 50px;
 }
