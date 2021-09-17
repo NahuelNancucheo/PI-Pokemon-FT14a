@@ -117,7 +117,7 @@ export const PokemonQuiz = () => {
 
                     <div className={styles.fourthDiv}>
                         <h1>Score: {Score}</h1>
-                        <div style={{display:"flex"}}><h1>Lives: </h1>{lives.map(x => <img key={x} id={x} className={styles.pokeballImg} src={Pokeball} alt="pokeball img" />)}</div>
+                        <div><h1>Lives: </h1>{lives.map(x => <img key={x} id={x} className={styles.pokeballImg} src={Pokeball} alt="pokeball img" />)}</div>
                     </div>
                 </div>}
                 {gameOver && <div className={styles.gameoverScreen}>
