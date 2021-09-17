@@ -4,7 +4,7 @@
 ![20210916_234106](https://user-images.githubusercontent.com/81537168/133716722-0b3ec156-99b7-414c-ac39-054b06becf89.gif)
 
 
-# Individual Project - Henry Pokemon
+# Individual Project - Pokemon App
 
 <p align="left">
   <img height="150" src="./pokemon.png" />
