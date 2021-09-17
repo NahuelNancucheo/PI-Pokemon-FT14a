@@ -10,6 +10,8 @@ La idea general es crear una aplicación en la cual se puedan ver los distintos 
   - Buscar pokemons
   - Filtrarlos / Ordenarlos
   - Crear nuevos pokemons
+  
+  ![20210917_002418](https://user-images.githubusercontent.com/81537168/133719263-450e08a6-2528-4c60-9f17-b2049a7e3207.gif)
 
 #### Tecnologías usadas:
 - [ ] React
