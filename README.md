@@ -1,7 +1,7 @@
 # Individual Project - Pokemon App
 
 ## New Feature! - Who's that Pokemon? Game
-![20210917_000211](https://user-images.githubusercontent.com/81537168/133717444-cbd7c62d-5c33-4f68-95ca-afe0a478e986.gif)
+![20210917_001118](https://user-images.githubusercontent.com/81537168/133718211-4665a9c3-d1bb-417b-8c3b-de7929ece637.gif)
 
 ## Enunciado
 
