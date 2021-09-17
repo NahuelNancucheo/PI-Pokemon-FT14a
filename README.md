@@ -16,6 +16,9 @@
 - Aprender y practicar el workflow de GIT.
 - Usar y practicar testing.
 
+```![20210916_234106](https://user-images.githubusercontent.com/81537168/133716545-cbbe0aa7-352b-4554-9239-810c206a880d.gif)
+
+
 ## Horarios y Fechas
 
 El proyecto tendrá una duración máxima de tres semanas. En el caso de que completan todas las tareas antes de dicho lapso podrán avisar a su Instructor para coordinar una fecha de presentación del trabajo (DEMO).
@@ -39,7 +42,6 @@ El boilerplate cuenta con dos carpetas: `api` y `client`. En estas carpetas esta
 
 En `api` crear un archivo llamado: `.env` que tenga la siguiente forma:
 
-```
 DB_USER=usuariodepostgres
 DB_PASSWORD=passwordDePostgres
 DB_HOST=localhost
