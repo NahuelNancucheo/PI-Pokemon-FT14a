@@ -1,16 +1,7 @@
 # Individual Project - Pokemon App
 
-<p align="left">
-  <img height="150" src="./pokemon.png" />
-</p>
-
-## Objetivos del Proyecto
-
-- Construir una App utlizando React, Redux, Node y Sequelize.
-- Afirmar y conectar los conceptos aprendidos en la carrera.
-- Aprender mejores prácticas.
-- Aprender y practicar el workflow de GIT.
-- Usar y practicar testing.
+## New Feature! - Who's that Pokemon? Game
+![20210917_000211](https://user-images.githubusercontent.com/81537168/133717444-cbd7c62d-5c33-4f68-95ca-afe0a478e986.gif)
 
 ## Enunciado
 
@@ -19,10 +10,6 @@ La idea general es crear una aplicación en la cual se puedan ver los distintos 
   - Buscar pokemons
   - Filtrarlos / Ordenarlos
   - Crear nuevos pokemons
-
-
-# New Feature! - Who's that Pokemon? Game
-![20210917_000211](https://user-images.githubusercontent.com/81537168/133717444-cbd7c62d-5c33-4f68-95ca-afe0a478e986.gif)
 
 #### Tecnologías usadas:
 - [ ] React
