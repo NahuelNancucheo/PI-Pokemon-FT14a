@@ -18,8 +18,8 @@ function Nav() {
                     <NavLink to='/'>
                         Landing page
                     </NavLink>
-                    <NavLink to='/about'>
-                        About me
+                    <NavLink to='/home/pokemonquiz'>
+                        Who's that Pokemon?
                     </NavLink>
                 </NavMenu>
             </NavBar>
