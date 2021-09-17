@@ -9,6 +9,7 @@ import Specs from './Components/Specs/Specs';
 import CreatePokemon from './Components/CreatePokemon/CreatePokemon';
 import Search from './Components/Search/Search';
 import { PokemonQuiz } from './Components/PokemonQuiz/PokemonQuiz';
+import { Footer } from './Components/Footer/Footer';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -24,6 +25,7 @@ function App() {
         <Route exact path='/home/pokemon/search' component={Search} />
         <Route exact path='/home/pokemonquiz' component={PokemonQuiz} />
       </Switch>
+      <Route path='/home' component={Footer} />
     </div>
   );
 }
